@@ -1,626 +1,816 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gamifikasi Intern - Team Dialogika</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
     <link href="../assets/css/style.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <style>
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background: #fdfeff;
-            color: #0f172a;
-        }
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        background: #fdfeff;
+        color: #0f172a;
+      }
 
-        .placeholder-dark::placeholder {
-            color: #94a3b8;
-            opacity: 1;
-        }
+      .placeholder-dark::placeholder {
+        color: #94a3b8;
+        opacity: 1;
+      }
 
-        .premium-shadow {
-            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.04);
-        }
+      .premium-shadow {
+        box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.04);
+      }
 
-        .glass {
-            background: rgba(255, 255, 255, 0.78);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
+      .glass {
+        background: rgba(255, 255, 255, 0.78);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
 
-        .active-pulse {
-            position: relative;
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background: #10b981;
-            border-radius: 50%;
-        }
+      .active-pulse {
+        position: relative;
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        background: #10b981;
+        border-radius: 50%;
+      }
 
-        .active-pulse::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: #10b981;
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-            opacity: 0.5;
-        }
+      .active-pulse::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #10b981;
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+        opacity: 0.5;
+      }
 
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.5; }
-            100% { transform: scale(3); opacity: 0; }
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+          opacity: 0.5;
         }
+        100% {
+          transform: scale(3);
+          opacity: 0;
+        }
+      }
 
+      .gami-tabs {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 16px;
+        flex-wrap: wrap;
+      }
+
+      .gami-tab {
+        padding: 6px 16px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 600;
+        border: 1px solid #e2e8f0;
+        background: #fff;
+        cursor: pointer;
+        color: #64748b;
+        transition: all 0.15s;
+      }
+
+      .gami-tab.active {
+        background: #0b2b6a;
+        color: #fff;
+        border-color: #0b2b6a;
+      }
+
+      .gami-tab:hover:not(.active) {
+        background: #f1f5f9;
+      }
+
+      .intern-gami-card {
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        padding: 16px 18px;
+        margin-bottom: 10px;
+      }
+
+      .badge-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 4px 10px;
+        border-radius: 999px;
+        border: 1px solid;
+        margin: 2px;
+      }
+
+      .badge-chip.early-bgn {
+        background: #fef3c7;
+        color: #92400e;
+        border-color: #f59e0b;
+      }
+      .badge-chip.early-nov {
+        background: #fde68a;
+        color: #78350f;
+        border-color: #d97706;
+      }
+      .badge-chip.early-mas {
+        background: #fbbf24;
+        color: #451a03;
+        border-color: #b45309;
+      }
+      .badge-chip.step-rookie {
+        background: #dbeafe;
+        color: #1e40af;
+        border-color: #3b82f6;
+      }
+      .badge-chip.step-strider {
+        background: #bfdbfe;
+        color: #1e3a8a;
+        border-color: #2563eb;
+      }
+      .badge-chip.step-sprint {
+        background: #1e40af;
+        color: #fff;
+        border-color: #1e3a8a;
+      }
+      .badge-chip.locked {
+        background: #f8fafc;
+        color: #94a3b8;
+        border-color: #e2e8f0;
+      }
+
+      .ldr-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 0;
+        border-bottom: 1px solid #f1f5f9;
+      }
+
+      .ldr-row:last-child {
+        border-bottom: none;
+      }
+
+      .ldr-rank {
+        font-size: 13px;
+        font-weight: 600;
+        width: 24px;
+        text-align: center;
+        flex-shrink: 0;
+      }
+
+      @media (max-width: 640px) {
         .gami-tabs {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 16px;
-            flex-wrap: wrap;
+          gap: 6px;
         }
-
         .gami-tab {
-            padding: 6px 16px;
-            border-radius: 999px;
-            font-size: 12px;
-            font-weight: 600;
-            border: 1px solid #e2e8f0;
-            background: #fff;
-            cursor: pointer;
-            color: #64748b;
-            transition: all 0.15s;
+          font-size: 11px;
+          padding: 5px 12px;
         }
-
-        .gami-tab.active {
-            background: #0b2b6a;
-            color: #fff;
-            border-color: #0b2b6a;
-        }
-
-        .gami-tab:hover:not(.active) {
-            background: #f1f5f9;
-        }
-
-        .intern-gami-card {
-            background: #fff;
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            padding: 16px 18px;
-            margin-bottom: 10px;
-        }
-
-        .badge-chip {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 11px;
-            font-weight: 600;
-            padding: 4px 10px;
-            border-radius: 999px;
-            border: 1px solid;
-            margin: 2px;
-        }
-
-        .badge-chip.early-bgn { background: #fef3c7; color: #92400e; border-color: #f59e0b; }
-        .badge-chip.early-nov { background: #fde68a; color: #78350f; border-color: #d97706; }
-        .badge-chip.early-mas { background: #fbbf24; color: #451a03; border-color: #b45309; }
-        .badge-chip.step-rookie { background: #dbeafe; color: #1e40af; border-color: #3b82f6; }
-        .badge-chip.step-strider { background: #bfdbfe; color: #1e3a8a; border-color: #2563eb; }
-        .badge-chip.step-sprint { background: #1e40af; color: #fff; border-color: #1e3a8a; }
-        .badge-chip.locked { background: #f8fafc; color: #94a3b8; border-color: #e2e8f0; }
-
-        .ldr-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px 0;
-            border-bottom: 1px solid #f1f5f9;
-        }
-
-        .ldr-row:last-child { border-bottom: none; }
-
-        .ldr-rank {
-            font-size: 13px;
-            font-weight: 600;
-            width: 24px;
-            text-align: center;
-            flex-shrink: 0;
-        }
-
-        @media (max-width: 640px) {
-            .gami-tabs { gap: 6px; }
-            .gami-tab { font-size: 11px; padding: 5px 12px; }
-        }
+      }
     </style>
-</head>
+  </head>
 
-<body class="antialiased" style="background-color:#f1f7fd;">
-
+  <body class="antialiased" style="background-color: #f1f7fd">
     <div id="topbarContainer"></div>
 
     <div class="dashboard-container">
-        <div id="sidebarContainer"></div>
+      <div id="sidebarContainer"></div>
 
-        <main class="main-content">
-            <div class="ml-20 p-8 md:p-12 lg:p-16 max-w-[1700px] mx-auto">
-                <header class="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-6">
-                    <div>
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="active-pulse"></span>
-                            <span class="text-xs font-bold tracking-[0.2em] text-slate-400 uppercase">Gamifikasi Intern</span>
-                        </div>
-                        <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight">
-                            Gamifikasi Kehadiran
-                            
-                        </h1>
-                    </div>
-                </header>
-
-                <div class="grid grid-cols-1 gap-8">
-                    <section class="glass rounded-[28px] premium-shadow overflow-hidden">
-                        <div
-                            class="px-6 py-5 border-b border-slate-100/80 flex flex-col md:flex-row gap-3 md:items-center md:justify-between">
-                            <div>
-                                <h3 class="text-lg font-bold text-[#0B2B6A]">Gamifikasi Kehadiran Intern</h3>
-                                <p class="text-xs text-slate-400 mt-0.5">Progress bulanan, leaderboard, dan achievement
-                                    kehadiran</p>
-                            </div>
-                            <div class="flex flex-wrap items-center gap-2">
-                                <input type="month" id="gamiMonthFilter"
-                                    class="px-3 py-2 rounded-xl text-xs border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#0B2B6A]">
-                                  <button id="kelolaQuizBtn"
-                                      class="hidden px-3 py-2 rounded-xl text-xs font-semibold border border-slate-200 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-[#0B2B6A] text-[#0B2B6A]"
-                                      style="transition:all .15s" title="Kelola Quiz">
-
-                                    <i class="bi bi-pencil-square me-1"></i>Kelola Quiz
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="p-6">
-                            <div class="gami-tabs">
-                                <button class="gami-tab" data-tab="progress">Progress Bulanan</button>
-                                <button class="gami-tab active" data-tab="leaderboard">Leaderboard</button>
-                                <button class="gami-tab" data-tab="legend">Panduan Achievement</button>
-                            </div>
-
-                            <div id="gamiTabProgress" class="hidden">
-                                <div class="flex flex-wrap gap-3 mb-5 text-xs text-slate-500">
-                                    <span class="flex items-center gap-1.5"><span
-                                            class="inline-block w-3 h-3 rounded-full bg-[#185FA5]"></span>Progress
-                                        normal</span>
-                                    <span class="flex items-center gap-1.5"><span
-                                            class="inline-block w-3 h-3 rounded-full bg-red-500"></span>Streak
-                                        aktif</span>
-                                </div>
-                                <div id="gamiCards"></div>
-                                <p id="gamiEmpty" class="text-xs text-slate-400 hidden py-4">Belum ada data gamifikasi
-                                    bulan ini.</p>
-                            </div>
-
-                            <div id="gamiTabLeaderboard">
-                                <div class="bg-white border border-slate-100 rounded-2xl p-5">
-                                    <p class="text-[11px] font-extrabold uppercase tracking-widest text-slate-400 mb-3">
-                                        Peringkat Bulan Ini</p>
-                                    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"
-                                        class="ldr-scroll-wrap">
-                                        <div id="gamiLeaderboard" style="min-width:620px;"></div>
-                                    </div>
-                                    <p id="gamiLdrEmpty" class="text-xs text-slate-400 hidden py-2">Belum ada data.</p>
-                                </div>
-                            </div>
-
-                            <div id="gamiTabLegend" class="hidden">
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    <div class="bg-white border border-slate-100 rounded-2xl p-5">
-                                        <p class="font-semibold text-slate-800 mb-1">☀️ Early Attend</p>
-                                        <p class="text-xs text-slate-500 mb-3">Diberikan untuk intern dengan total clock
-                                            in paling awal pada bulan aktif.</p>
-                                        <div class="flex flex-col gap-2">
-                                            <span class="badge-chip early-bgn w-fit">☀️ Beginner - total 2x paling
-                                                awal</span>
-                                            <span class="badge-chip early-nov w-fit">☀️ Novice - total 4x paling
-                                                awal</span>
-                                            <span class="badge-chip early-mas w-fit">☀️ Mastery - total 10x paling
-                                                awal</span>
-                                        </div>
-                                    </div>
-                                    <div class="bg-white border border-slate-100 rounded-2xl p-5">
-                                        <p class="font-semibold text-slate-800 mb-1">🔥 Step-in Master</p>
-                                        <p class="text-xs text-slate-500 mb-3">Diberikan untuk intern dengan streak
-                                            kehadiran valid pada hari kerja bulan aktif.</p>
-                                        <div class="flex flex-col gap-2">
-                                            <span class="badge-chip step-rookie w-fit">🔥 Rookie - 3 hari
-                                                berturut-turut</span>
-                                            <span class="badge-chip step-strider w-fit">🔥 Strider - 7 hari
-                                                berturut-turut</span>
-                                            <span class="badge-chip step-sprint w-fit">🔥 Sprinter - 14 hari
-                                                berturut-turut</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
+      <main class="main-content">
+        <div class="ml-20 p-8 md:p-12 lg:p-16 max-w-[1700px] mx-auto">
+          <header
+            class="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-6"
+          >
+            <div>
+              <div class="flex items-center gap-2 mb-2">
+                <span class="active-pulse"></span>
+                <span
+                  class="text-xs font-bold tracking-[0.2em] text-slate-400 uppercase"
+                  >Gamifikasi Intern</span
+                >
+              </div>
+              <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight">
+                Gamifikasi Kehadiran
+              </h1>
             </div>
-        </main>
+          </header>
+
+          <div class="grid grid-cols-1 gap-8">
+            <section
+              class="glass rounded-[28px] premium-shadow overflow-hidden"
+            >
+              <div
+                class="px-6 py-5 border-b border-slate-100/80 flex flex-col md:flex-row gap-3 md:items-center md:justify-between"
+              >
+                <div>
+                  <h3 class="text-lg font-bold text-[#0B2B6A]">
+                    Gamifikasi Kehadiran Intern
+                  </h3>
+                  <p class="text-xs text-slate-400 mt-0.5">
+                    Progress bulanan, leaderboard, dan achievement kehadiran
+                  </p>
+                </div>
+                <div class="flex flex-wrap items-center gap-2">
+                  <input
+                    type="month"
+                    id="gamiMonthFilter"
+                    class="px-3 py-2 rounded-xl text-xs border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#0B2B6A]"
+                  />
+                  <button
+                    id="kelolaQuizBtn"
+                    class="hidden px-3 py-2 rounded-xl text-xs font-semibold border border-slate-200 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-[#0B2B6A] text-[#0B2B6A]"
+                    style="transition: all 0.15s"
+                    title="Kelola Quiz"
+                  >
+                    <i class="bi bi-pencil-square me-1"></i>Kelola Quiz
+                  </button>
+                </div>
+              </div>
+
+              <div class="p-6">
+                <div class="gami-tabs">
+                  <button class="gami-tab" data-tab="progress">
+                    Progress Bulanan
+                  </button>
+                  <button class="gami-tab active" data-tab="leaderboard">
+                    Leaderboard
+                  </button>
+                  <button class="gami-tab" data-tab="legend">
+                    Panduan Achievement
+                  </button>
+                </div>
+
+                <div id="gamiTabProgress" class="hidden">
+                  <div class="flex flex-wrap gap-3 mb-5 text-xs text-slate-500">
+                    <span class="flex items-center gap-1.5"
+                      ><span
+                        class="inline-block w-3 h-3 rounded-full bg-[#185FA5]"
+                      ></span
+                      >Progress normal</span
+                    >
+                    <span class="flex items-center gap-1.5"
+                      ><span
+                        class="inline-block w-3 h-3 rounded-full bg-red-500"
+                      ></span
+                      >Streak aktif</span
+                    >
+                  </div>
+                  <div id="gamiCards"></div>
+                  <p id="gamiEmpty" class="text-xs text-slate-400 hidden py-4">
+                    Belum ada data gamifikasi bulan ini.
+                  </p>
+                </div>
+
+                <div id="gamiTabLeaderboard">
+                  <div class="bg-white border border-slate-100 rounded-2xl p-5">
+                    <p
+                      class="text-[11px] font-extrabold uppercase tracking-widest text-slate-400 mb-3"
+                    >
+                      Peringkat Bulan Ini
+                    </p>
+                    <div
+                      style="
+                        overflow-x: auto;
+                        -webkit-overflow-scrolling: touch;
+                      "
+                      class="ldr-scroll-wrap"
+                    >
+                      <div id="gamiLeaderboard" style="min-width: 620px"></div>
+                    </div>
+                    <p
+                      id="gamiLdrEmpty"
+                      class="text-xs text-slate-400 hidden py-2"
+                    >
+                      Belum ada data.
+                    </p>
+                  </div>
+                </div>
+
+                <div id="gamiTabLegend" class="hidden">
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div
+                      class="bg-white border border-slate-100 rounded-2xl p-5"
+                    >
+                      <p class="font-semibold text-slate-800 mb-1">
+                        ☀️ Early Attend
+                      </p>
+                      <p class="text-xs text-slate-500 mb-3">
+                        Diberikan untuk intern dengan total clock in paling awal
+                        pada bulan aktif.
+                      </p>
+                      <div class="flex flex-col gap-2">
+                        <span class="badge-chip early-bgn w-fit"
+                          >☀️ Beginner - total 2x paling awal</span
+                        >
+                        <span class="badge-chip early-nov w-fit"
+                          >☀️ Novice - total 4x paling awal</span
+                        >
+                        <span class="badge-chip early-mas w-fit"
+                          >☀️ Mastery - total 10x paling awal</span
+                        >
+                      </div>
+                    </div>
+                    <div
+                      class="bg-white border border-slate-100 rounded-2xl p-5"
+                    >
+                      <p class="font-semibold text-slate-800 mb-1">
+                        🔥 Step-in Master
+                      </p>
+                      <p class="text-xs text-slate-500 mb-3">
+                        Diberikan untuk intern dengan streak kehadiran valid
+                        pada hari kerja bulan aktif.
+                      </p>
+                      <div class="flex flex-col gap-2">
+                        <span class="badge-chip step-rookie w-fit"
+                          >🔥 Rookie - 3 hari berturut-turut</span
+                        >
+                        <span class="badge-chip step-strider w-fit"
+                          >🔥 Strider - 7 hari berturut-turut</span
+                        >
+                        <span class="badge-chip step-sprint w-fit"
+                          >🔥 Sprinter - 14 hari berturut-turut</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </main>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, getDocs, query, where, addDoc, updateDoc, deleteDoc, doc, serverTimestamp, orderBy, getDoc, setDoc, Timestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-        import { renderTopBar } from "../element/topbar.js";
-        import { renderSidebar } from "../element/sidebar.js";
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+      import {
+        getFirestore,
+        collection,
+        getDocs,
+        query,
+        where,
+        addDoc,
+        updateDoc,
+        deleteDoc,
+        doc,
+        serverTimestamp,
+        orderBy,
+        getDoc,
+        setDoc,
+        Timestamp,
+      } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+      import { renderTopBar } from "../element/topbar.js";
+      import { renderSidebar } from "../element/sidebar.js";
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyDyzzEYbJkkl-N8snrQf14qvj8De4YliV0",
-            authDomain: "pre-dialogika.firebaseapp.com",
-            projectId: "pre-dialogika",
-            storageBucket: "pre-dialogika.firebasestorage.app",
-            messagingSenderId: "343771410480",
-            appId: "1:343771410480:web:32881c9868522090237df5",
-            measurementId: "G-SXN811P3N0"
-        };
+      const firebaseConfig = {
+        apiKey: "AIzaSyDyzzEYbJkkl-N8snrQf14qvj8De4YliV0",
+        authDomain: "pre-dialogika.firebaseapp.com",
+        projectId: "pre-dialogika",
+        storageBucket: "pre-dialogika.firebasestorage.app",
+        messagingSenderId: "343771410480",
+        appId: "1:343771410480:web:32881c9868522090237df5",
+        measurementId: "G-SXN811P3N0",
+      };
 
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
 
-        const topbarTarget = document.getElementById("topbarContainer");
-        if (topbarTarget) renderTopBar(topbarTarget);
-        const sidebarTarget = document.getElementById("sidebarContainer");
-        if (sidebarTarget) renderSidebar(sidebarTarget);
+      const topbarTarget = document.getElementById("topbarContainer");
+      if (topbarTarget) renderTopBar(topbarTarget);
+      const sidebarTarget = document.getElementById("sidebarContainer");
+      if (sidebarTarget) renderSidebar(sidebarTarget);
 
-        const gamiMonthFilter = document.getElementById('gamiMonthFilter');
-        const gamiCards = document.getElementById('gamiCards');
-        const gamiEmpty = document.getElementById('gamiEmpty');
-        const gamiLeaderboard = document.getElementById('gamiLeaderboard');
-        const gamiLdrEmpty = document.getElementById('gamiLdrEmpty');
+      const gamiMonthFilter = document.getElementById("gamiMonthFilter");
+      const gamiCards = document.getElementById("gamiCards");
+      const gamiEmpty = document.getElementById("gamiEmpty");
+      const gamiLeaderboard = document.getElementById("gamiLeaderboard");
+      const gamiLdrEmpty = document.getElementById("gamiLdrEmpty");
 
-        let allInterns = [];
-        let allAttendanceRecords = [];
-        let allQuizResults = [];
-        let allApprovedDailyReports = [];
+      let allInterns = [];
+      let allAttendanceRecords = [];
+      let allQuizResults = [];
+      let allApprovedDailyReports = [];
 
-        function getTodayKey() {
-            const now = new Date();
-            const y = now.getFullYear();
-            const m = String(now.getMonth() + 1).padStart(2, '0');
-            const d = String(now.getDate()).padStart(2, '0');
-            return `${y}-${m}-${d}`;
+      function getTodayKey() {
+        const now = new Date();
+        const y = now.getFullYear();
+        const m = String(now.getMonth() + 1).padStart(2, "0");
+        const d = String(now.getDate()).padStart(2, "0");
+        return `${y}-${m}-${d}`;
+      }
+
+      function parseTimeToSeconds(timeStr) {
+        if (!timeStr) return null;
+        const [h, m, s] = String(timeStr).split(":").map(Number);
+        if ([h, m, s].some(Number.isNaN)) return null;
+        return h * 3600 + m * 60 + s;
+      }
+
+      function getMonthRangeFromMonthKey(monthKey) {
+        const [y, m] = monthKey.split("-").map(Number);
+        const d = new Date(y, (m || 1) - 1, 1);
+        const start = new Date(d.getFullYear(), d.getMonth(), 1);
+        const end = new Date(d.getFullYear(), d.getMonth() + 1, 0);
+        const f = (x) =>
+          `${x.getFullYear()}-${String(x.getMonth() + 1).padStart(2, "0")}-${String(x.getDate()).padStart(2, "0")}`;
+        return { startKey: f(start), endKey: f(end) };
+      }
+
+      function getMonthKeyFromDate(dateKey) {
+        const d = new Date(dateKey + "T00:00:00");
+        return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
+      }
+
+      function avatarHtml(photo, name, size = 36) {
+        const initials =
+          String(name || "TN")
+            .split(" ")
+            .slice(0, 2)
+            .map((word) => word[0] || "")
+            .join("")
+            .toUpperCase() || "TN";
+        if (photo) {
+          return `<div style="width:${size}px;height:${size}px;border-radius:50%;background:url('${photo}') center/cover;border:2px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.08);flex-shrink:0"></div>`;
         }
+        return `<div style="width:${size}px;height:${size}px;border-radius:50%;background:#dbeafe;display:flex;align-items:center;justify-content:center;font-size:${Math.round(size * 0.36)}px;font-weight:600;color:#1e40af;border:2px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.08);flex-shrink:0">${initials}</div>`;
+      }
 
-        function parseTimeToSeconds(timeStr) {
-            if (!timeStr) return null;
-            const [h, m, s] = String(timeStr).split(':').map(Number);
-            if ([h, m, s].some(Number.isNaN)) return null;
-            return h * 3600 + m * 60 + s;
+      function getWorkDaysInMonth(monthKey) {
+        const [y, m] = monthKey.split("-").map(Number);
+        const days = [];
+        const d = new Date(y, m - 1, 1);
+        while (d.getMonth() === m - 1) {
+          const dow = d.getDay();
+          if ([0, 2, 4, 6].includes(dow)) {
+            days.push(
+              `${y}-${String(m).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`,
+            );
+          }
+          d.setDate(d.getDate() + 1);
         }
+        return days;
+      }
 
-        function getMonthRangeFromMonthKey(monthKey) {
-            const [y, m] = monthKey.split('-').map(Number);
-            const d = new Date(y, (m || 1) - 1, 1);
-            const start = new Date(d.getFullYear(), d.getMonth(), 1);
-            const end = new Date(d.getFullYear(), d.getMonth() + 1, 0);
-            const f = (x) => `${x.getFullYear()}-${String(x.getMonth() + 1).padStart(2, '0')}-${String(x.getDate()).padStart(2, '0')}`;
-            return { startKey: f(start), endKey: f(end) };
-        }
-
-        function getMonthKeyFromDate(dateKey) {
-            const d = new Date(dateKey + 'T00:00:00');
-            return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
-        }
-
-        function avatarHtml(photo, name, size = 36) {
-            const initials = String(name || 'TN')
-                .split(' ')
-                .slice(0, 2)
-                .map(word => word[0] || '')
-                .join('')
-                .toUpperCase() || 'TN';
-            if (photo) {
-                return `<div style="width:${size}px;height:${size}px;border-radius:50%;background:url('${photo}') center/cover;border:2px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.08);flex-shrink:0"></div>`;
-            }
-            return `<div style="width:${size}px;height:${size}px;border-radius:50%;background:#dbeafe;display:flex;align-items:center;justify-content:center;font-size:${Math.round(size * 0.36)}px;font-weight:600;color:#1e40af;border:2px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.08);flex-shrink:0">${initials}</div>`;
-        }
-
-        function getWorkDaysInMonth(monthKey) {
-            const [y, m] = monthKey.split('-').map(Number);
-            const days = [];
-            const d = new Date(y, m - 1, 1);
-            while (d.getMonth() === m - 1) {
-                const dow = d.getDay();
-                if ([0, 2, 4, 6].includes(dow)) {
-                    days.push(`${y}-${String(m).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`);
-                }
-                d.setDate(d.getDate() + 1);
-            }
-            return days;
-        }
-
-        function computeStreakSegs(attendanceFlags) {
-            const segments = [];
-            let index = 0;
-            while (index < attendanceFlags.length) {
-                if (attendanceFlags[index] !== 1) {
-                    segments.push({
-                        start: index,
-                        end: index,
-                        type: attendanceFlags[index] === -1 ? 'future' : 'absent',
-                        len: 1
-                    });
-                    index += 1;
-                    continue;
-                }
-                let end = index;
-                while (end < attendanceFlags.length && attendanceFlags[end] === 1) end += 1;
-                const len = end - index;
-                segments.push({
-                    start: index,
-                    end: end - 1,
-                    type: len >= 2 ? 'streak' : 'present',
-                    len
-                });
-                index = end;
-            }
-            return segments;
-        }
-
-        function calcBestStreak(attendanceFlags) {
-            let best = 0;
-            let current = 0;
-            attendanceFlags.forEach(flag => {
-                current = flag === 1 ? current + 1 : 0;
-                best = Math.max(best, current);
+      function computeStreakSegs(attendanceFlags) {
+        const segments = [];
+        let index = 0;
+        while (index < attendanceFlags.length) {
+          if (attendanceFlags[index] !== 1) {
+            segments.push({
+              start: index,
+              end: index,
+              type: attendanceFlags[index] === -1 ? "future" : "absent",
+              len: 1,
             });
-            return best;
+            index += 1;
+            continue;
+          }
+          let end = index;
+          while (end < attendanceFlags.length && attendanceFlags[end] === 1)
+            end += 1;
+          const len = end - index;
+          segments.push({
+            start: index,
+            end: end - 1,
+            type: len >= 2 ? "streak" : "present",
+            len,
+          });
+          index = end;
         }
+        return segments;
+      }
 
-        function calcCurrentStreak(attendanceFlags) {
-            let count = 0;
-            let index = attendanceFlags.length - 1;
-            while (index >= 0 && attendanceFlags[index] === -1) index -= 1;
-            while (index >= 0 && attendanceFlags[index] === 1) {
-                count += 1;
-                index -= 1;
+      function calcBestStreak(attendanceFlags) {
+        let best = 0;
+        let current = 0;
+        attendanceFlags.forEach((flag) => {
+          current = flag === 1 ? current + 1 : 0;
+          best = Math.max(best, current);
+        });
+        return best;
+      }
+
+      function calcCurrentStreak(attendanceFlags) {
+        let count = 0;
+        let index = attendanceFlags.length - 1;
+        while (index >= 0 && attendanceFlags[index] === -1) index -= 1;
+        while (index >= 0 && attendanceFlags[index] === 1) {
+          count += 1;
+          index -= 1;
+        }
+        return count;
+      }
+
+      function earlyBadge(earlyCount) {
+        if (earlyCount >= 10) return ["early-mas", "☀️ Early Mastery"];
+        if (earlyCount >= 4) return ["early-nov", "☀️ Early Novice"];
+        if (earlyCount >= 2) return ["early-bgn", "☀️ Early Beginner"];
+        return null;
+      }
+
+      function stepBadge(streak) {
+        if (streak >= 14) return ["step-sprint", "🔥 Step-in Sprinter"];
+        if (streak >= 7) return ["step-strider", "🔥 Step-in Strider"];
+        if (streak >= 3) return ["step-rookie", "🔥 Step-in Rookie"];
+        return null;
+      }
+
+      function renderGamification(monthKey) {
+        if (!allInterns.length || !gamiCards || !gamiLeaderboard) return;
+
+        const { startKey, endKey } = getMonthRangeFromMonthKey(monthKey);
+        const workDays = getWorkDaysInMonth(monthKey);
+        const totalDays = workDays.length;
+        const todayKey = getTodayKey();
+        const allowed = new Set(allInterns.map((intern) => intern.id));
+        const validPairs = new Map();
+
+        allAttendanceRecords.forEach((record) => {
+          if (
+            !record.user_id ||
+            !record.date ||
+            !record.type ||
+            !allowed.has(record.user_id)
+          )
+            return;
+          if (record.date < startKey || record.date > endKey) return;
+          const key = `${record.user_id}__${record.date}`;
+          if (!validPairs.has(key)) {
+            validPairs.set(key, {
+              user_id: record.user_id,
+              date: record.date,
+              loginSec: null,
+              logoutSec: null,
+            });
+          }
+          const row = validPairs.get(key);
+          const sec = parseTimeToSeconds(record.time);
+          if (
+            record.type === "login" &&
+            (row.loginSec == null || (sec != null && sec < row.loginSec))
+          ) {
+            row.loginSec = sec;
+          }
+          if (
+            record.type === "logout" &&
+            (row.logoutSec == null || (sec != null && sec > row.logoutSec))
+          ) {
+            row.logoutSec = sec;
+          }
+        });
+
+        const presentMap = new Map();
+        const dateEarliest = new Map();
+        validPairs.forEach((value) => {
+          if (
+            value.loginSec == null ||
+            value.logoutSec == null ||
+            value.logoutSec < value.loginSec
+          )
+            return;
+          if (!presentMap.has(value.user_id))
+            presentMap.set(value.user_id, new Set());
+          presentMap.get(value.user_id).add(value.date);
+          if (!dateEarliest.has(value.date)) dateEarliest.set(value.date, []);
+          dateEarliest
+            .get(value.date)
+            .push({ uid: value.user_id, loginSec: value.loginSec });
+        });
+
+        const earlyCountMap = new Map();
+        const earlyConsecutiveMap = new Map();
+        const earlyDateByCount = new Map();
+        allInterns.forEach((intern) => {
+          earlyCountMap.set(intern.id, 0);
+          earlyConsecutiveMap.set(intern.id, 0);
+          earlyDateByCount.set(intern.id, []);
+        });
+
+        workDays
+          .filter((date) => date <= todayKey)
+          .sort()
+          .forEach((date) => {
+            const attendees = dateEarliest.get(date) || [];
+            if (!attendees.length) {
+              allInterns.forEach((intern) =>
+                earlyConsecutiveMap.set(intern.id, 0),
+              );
+              return;
             }
-            return count;
-        }
-
-        function earlyBadge(earlyCount) {
-            if (earlyCount >= 10) return ['early-mas', '☀️ Early Mastery'];
-            if (earlyCount >= 4) return ['early-nov', '☀️ Early Novice'];
-            if (earlyCount >= 2) return ['early-bgn', '☀️ Early Beginner'];
-            return null;
-        }
-
-        function stepBadge(streak) {
-            if (streak >= 14) return ['step-sprint', '🔥 Step-in Sprinter'];
-            if (streak >= 7) return ['step-strider', '🔥 Step-in Strider'];
-            if (streak >= 3) return ['step-rookie', '🔥 Step-in Rookie'];
-            return null;
-        }
-
-        function renderGamification(monthKey) {
-            if (!allInterns.length || !gamiCards || !gamiLeaderboard) return;
-
-            const { startKey, endKey } = getMonthRangeFromMonthKey(monthKey);
-            const workDays = getWorkDaysInMonth(monthKey);
-            const totalDays = workDays.length;
-            const todayKey = getTodayKey();
-            const allowed = new Set(allInterns.map(intern => intern.id));
-            const validPairs = new Map();
-
-            allAttendanceRecords.forEach(record => {
-                if (!record.user_id || !record.date || !record.type || !allowed.has(record.user_id)) return;
-                if (record.date < startKey || record.date > endKey) return;
-                const key = `${record.user_id}__${record.date}`;
-                if (!validPairs.has(key)) {
-                    validPairs.set(key, {
-                        user_id: record.user_id,
-                        date: record.date,
-                        loginSec: null,
-                        logoutSec: null
-                    });
-                }
-                const row = validPairs.get(key);
-                const sec = parseTimeToSeconds(record.time);
-                if (record.type === 'login' && (row.loginSec == null || (sec != null && sec < row.loginSec))) {
-                    row.loginSec = sec;
-                }
-                if (record.type === 'logout' && (row.logoutSec == null || (sec != null && sec > row.logoutSec))) {
-                    row.logoutSec = sec;
-                }
-            });
-
-            const presentMap = new Map();
-            const dateEarliest = new Map();
-            validPairs.forEach(value => {
-                if (value.loginSec == null || value.logoutSec == null || value.logoutSec < value.loginSec) return;
-                if (!presentMap.has(value.user_id)) presentMap.set(value.user_id, new Set());
-                presentMap.get(value.user_id).add(value.date);
-                if (!dateEarliest.has(value.date)) dateEarliest.set(value.date, []);
-                dateEarliest.get(value.date).push({ uid: value.user_id, loginSec: value.loginSec });
-            });
-
-            const earlyCountMap = new Map();
-            const earlyConsecutiveMap = new Map();
-            const earlyDateByCount = new Map();
-            allInterns.forEach(intern => {
-                earlyCountMap.set(intern.id, 0);
+            const minSec = Math.min(
+              ...attendees.map((attendee) => attendee.loginSec),
+            );
+            const earliestSet = new Set(
+              attendees
+                .filter((attendee) => attendee.loginSec === minSec)
+                .map((attendee) => attendee.uid),
+            );
+            allInterns.forEach((intern) => {
+              if (earliestSet.has(intern.id)) {
+                earlyConsecutiveMap.set(
+                  intern.id,
+                  earlyConsecutiveMap.get(intern.id) + 1,
+                );
+                const newCount = (earlyCountMap.get(intern.id) || 0) + 1;
+                earlyCountMap.set(intern.id, newCount);
+                earlyDateByCount.get(intern.id).push(date);
+              } else {
                 earlyConsecutiveMap.set(intern.id, 0);
-                earlyDateByCount.set(intern.id, []);
+              }
             });
+          });
 
-            workDays.filter(date => date <= todayKey).sort().forEach(date => {
-                const attendees = dateEarliest.get(date) || [];
-                if (!attendees.length) {
-                    allInterns.forEach(intern => earlyConsecutiveMap.set(intern.id, 0));
-                    return;
+        const dayNames = { 0: "Min", 2: "Sel", 4: "Kam", 6: "Sab" };
+
+        // Map user_id to total quiz score
+        const quizScoreMap = new Map();
+        allQuizResults.forEach((res) => {
+          const prev = quizScoreMap.get(res.user_id) || 0;
+          quizScoreMap.set(res.user_id, prev + res.score);
+        });
+
+        // Map user_id to total Quest points.
+        // Fair attribution: credit full points to the people who actually did the work
+        // (task.who_did_this). If who_did_this is missing (older reports), fall back to
+        // report.user_id so legacy data is still counted.
+        const questPointsMap = new Map();
+        allApprovedDailyReports.forEach((report) => {
+          if (report.tasks && Array.isArray(report.tasks)) {
+            report.tasks
+              .filter((t) => t.status === "Approved")
+              .forEach((t) => {
+                // Daily report manual (tasks tanpa field points) dihitung default 1 poin
+                const pts = parseInt(t.points, 10) || 1;
+                let recipients = Array.isArray(t.who_did_this)
+                  ? t.who_did_this.filter(Boolean)
+                  : [];
+                if (!recipients.length && report.user_id) {
+                  recipients = [report.user_id];
                 }
-                const minSec = Math.min(...attendees.map(attendee => attendee.loginSec));
-                const earliestSet = new Set(attendees.filter(attendee => attendee.loginSec === minSec).map(attendee => attendee.uid));
-                allInterns.forEach(intern => {
-                    if (earliestSet.has(intern.id)) {
-                        earlyConsecutiveMap.set(intern.id, earlyConsecutiveMap.get(intern.id) + 1);
-                        const newCount = (earlyCountMap.get(intern.id) || 0) + 1;
-                        earlyCountMap.set(intern.id, newCount);
-                        earlyDateByCount.get(intern.id).push(date);
-                    } else {
-                        earlyConsecutiveMap.set(intern.id, 0);
-                    }
+                // Dedupe: a uid selected twice must not double-credit points
+                recipients = Array.from(new Set(recipients));
+                recipients.forEach((uid) => {
+                  const currentPoints = questPointsMap.get(uid) || 0;
+                  questPointsMap.set(uid, currentPoints + pts);
                 });
+              });
+          }
+        });
+
+        const leaderboardRows = allInterns
+          .map((intern) => {
+            const presentDates = presentMap.get(intern.id) || new Set();
+            const flags = workDays.map((date) => {
+              if (date > todayKey) return -1;
+              return presentDates.has(date) ? 1 : 0;
             });
+            const earlyCount = earlyCountMap.get(intern.id) || 0;
+            const earlyDates = earlyDateByCount.get(intern.id) || [];
+            const earlyTiebreakerDate =
+              earlyDates.length > 0
+                ? earlyDates[earlyDates.length - 1]
+                : "9999-99-99";
+            const totalQuizScore = quizScoreMap.get(intern.id) || 0;
+            const questPoints = questPointsMap.get(intern.id) || 0;
 
-            const dayNames = { 0: 'Min', 2: 'Sel', 4: 'Kam', 6: 'Sab' };
-            
-            // Map user_id to total quiz score
-            const quizScoreMap = new Map();
-            allQuizResults.forEach(res => {
-                const prev = quizScoreMap.get(res.user_id) || 0;
-                quizScoreMap.set(res.user_id, prev + res.score);
-            });
+            return {
+              ...intern,
+              flags,
+              segments: computeStreakSegs(flags),
+              bestStreak: calcBestStreak(flags),
+              currentStreak: calcCurrentStreak(flags),
+              totalPresent: flags.filter((flag) => flag === 1).length,
+              countedDays: flags.filter((flag) => flag !== -1).length,
+              earlyCount,
+              earlyTiebreakerDate,
+              quizScore: totalQuizScore,
+              questPoints: questPoints,
+            };
+          })
+          .sort((a, b) => {
+            const ptA =
+              a.earlyCount + a.bestStreak + a.quizScore + a.questPoints;
+            const ptB =
+              b.earlyCount + b.bestStreak + b.quizScore + b.questPoints;
+            if (ptB !== ptA) return ptB - ptA;
+            if (a.earlyTiebreakerDate !== b.earlyTiebreakerDate)
+              return a.earlyTiebreakerDate < b.earlyTiebreakerDate ? -1 : 1;
+            return a.name.localeCompare(b.name);
+          });
 
-            // Map user_id to total Quest points.
-            // Fair attribution: credit full points to the people who actually did the work
-            // (task.who_did_this). If who_did_this is missing (older reports), fall back to
-            // report.user_id so legacy data is still counted.
-            const questPointsMap = new Map();
-            allApprovedDailyReports.forEach(report => {
-                if (report.tasks && Array.isArray(report.tasks)) {
-                    report.tasks
-                        .filter(t => t.status === 'Approved')
-                        .forEach(t => {
-                            const pts = parseInt(t.points, 10) || 0;
-                            if (pts <= 0) return;
-                            let recipients = Array.isArray(t.who_did_this)
-                                ? t.who_did_this.filter(Boolean)
-                                : [];
-                            if (!recipients.length && report.user_id) {
-                                recipients = [report.user_id];
-                            }
-                            // Dedupe: a uid selected twice must not double-credit points
-                            recipients = Array.from(new Set(recipients));
-                            recipients.forEach(uid => {
-                                const currentPoints = questPointsMap.get(uid) || 0;
-                                questPointsMap.set(uid, currentPoints + pts);
-                            });
-                        });
-                }
-            });
+        gamiCards.innerHTML = "";
+        gamiLeaderboard.innerHTML = "";
 
-            const leaderboardRows = allInterns.map(intern => {
-                const presentDates = presentMap.get(intern.id) || new Set();
-                const flags = workDays.map(date => {
-                    if (date > todayKey) return -1;
-                    return presentDates.has(date) ? 1 : 0;
-                });
-                const earlyCount = earlyCountMap.get(intern.id) || 0;
-                const earlyDates = earlyDateByCount.get(intern.id) || [];
-                const earlyTiebreakerDate = earlyDates.length > 0 ? earlyDates[earlyDates.length - 1] : '9999-99-99';
-                const totalQuizScore = quizScoreMap.get(intern.id) || 0;
-                const questPoints = questPointsMap.get(intern.id) || 0;
+        if (!leaderboardRows.length || !totalDays) {
+          gamiEmpty.classList.remove("hidden");
+          gamiLdrEmpty.classList.remove("hidden");
+          return;
+        }
 
-                return {
-                    ...intern,
-                    flags,
-                    segments: computeStreakSegs(flags),
-                    bestStreak: calcBestStreak(flags),
-                    currentStreak: calcCurrentStreak(flags),
-                    totalPresent: flags.filter(flag => flag === 1).length,
-                    countedDays: flags.filter(flag => flag !== -1).length,
-                    earlyCount,
-                    earlyTiebreakerDate,
-                    quizScore: totalQuizScore,
-                    questPoints: questPoints
-                };
-            }).sort((a, b) => {
-                const ptA = a.earlyCount + a.bestStreak + a.quizScore + a.questPoints;
-                const ptB = b.earlyCount + b.bestStreak + b.quizScore + b.questPoints;
-                if (ptB !== ptA) return ptB - ptA;
-                if (a.earlyTiebreakerDate !== b.earlyTiebreakerDate)
-                    return a.earlyTiebreakerDate < b.earlyTiebreakerDate ? -1 : 1;
-                return a.name.localeCompare(b.name);
-            });
+        gamiEmpty.classList.add("hidden");
+        gamiLdrEmpty.classList.add("hidden");
 
-            gamiCards.innerHTML = '';
-            gamiLeaderboard.innerHTML = '';
+        leaderboardRows.forEach((intern) => {
+          const percentage =
+            intern.countedDays > 0
+              ? Math.round((intern.totalPresent / intern.countedDays) * 100)
+              : 0;
+          const flameSegments = intern.segments.filter(
+            (segment) => segment.type === "streak",
+          );
+          const segmentColors = {
+            streak: "#E24B4A",
+            present: "#185FA5",
+            absent: "#e2e8f0",
+            future: "#f1f5f9",
+          };
 
-            if (!leaderboardRows.length || !totalDays) {
-                gamiEmpty.classList.remove('hidden');
-                gamiLdrEmpty.classList.remove('hidden');
-                return;
-            }
+          let flameRowHTML = "";
+          flameSegments.forEach((segment) => {
+            const leftPct = (((segment.end + 1) / totalDays) * 100).toFixed(3);
+            flameRowHTML += `<div style="position:absolute;left:${leftPct}%;bottom:0;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0"><span style="font-size:13px;line-height:1">🔥</span><span style="font-size:8px;font-weight:700;color:#A32D2D;line-height:1.2">${segment.len}x</span></div>`;
+          });
 
-            gamiEmpty.classList.add('hidden');
-            gamiLdrEmpty.classList.add('hidden');
+          let barInnerHTML = "";
+          intern.segments.forEach((segment) => {
+            const widthPct = ((segment.len / totalDays) * 100).toFixed(4);
+            const isFuture = segment.type === "future";
+            const titleText = workDays
+              .slice(segment.start, segment.end + 1)
+              .map((date) => {
+                const dt = new Date(date + "T00:00:00");
+                const statusText = isFuture
+                  ? "Belum"
+                  : segment.type === "absent"
+                    ? "Tidak Hadir"
+                    : "Hadir";
+                return `${dayNames[dt.getDay()] || ""} ${dt.getDate()}: ${statusText}`;
+              })
+              .join("\n");
+            barInnerHTML += `<div style="width:${widthPct}%;height:100%;background:${segmentColors[segment.type]};flex-shrink:0" title="${titleText}"></div>`;
+          });
 
-            leaderboardRows.forEach(intern => {
-                const percentage = intern.countedDays > 0 ? Math.round((intern.totalPresent / intern.countedDays) * 100) : 0;
-                const flameSegments = intern.segments.filter(segment => segment.type === 'streak');
-                const segmentColors = {
-                    streak: '#E24B4A',
-                    present: '#185FA5',
-                    absent: '#e2e8f0',
-                    future: '#f1f5f9'
-                };
+          let labelsHTML = "";
+          const labelIndexes = [
+            0,
+            Math.round(totalDays / 4) - 1,
+            Math.round(totalDays / 2) - 1,
+            Math.round((totalDays * 3) / 4) - 1,
+            totalDays - 1,
+          ];
+          new Set(
+            labelIndexes.filter((index) => index >= 0 && index < totalDays),
+          ).forEach((index) => {
+            const dt = new Date(workDays[index] + "T00:00:00");
+            const leftPct = (((index + 0.5) / totalDays) * 100).toFixed(2);
+            labelsHTML += `<div style="position:absolute;left:${leftPct}%;transform:translateX(-50%);font-size:8px;color:#94a3b8;white-space:nowrap">${(dayNames[dt.getDay()] || "") + dt.getDate()}</div>`;
+          });
 
-                let flameRowHTML = '';
-                flameSegments.forEach(segment => {
-                    const leftPct = (((segment.end + 1) / totalDays) * 100).toFixed(3);
-                    flameRowHTML += `<div style="position:absolute;left:${leftPct}%;bottom:0;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0"><span style="font-size:13px;line-height:1">🔥</span><span style="font-size:8px;font-weight:700;color:#A32D2D;line-height:1.2">${segment.len}x</span></div>`;
-                });
+          const early = earlyBadge(intern.earlyCount);
+          const streak = stepBadge(intern.bestStreak);
+          const badgeClassMap = {
+            "early-bgn": "badge-chip early-bgn",
+            "early-nov": "badge-chip early-nov",
+            "early-mas": "badge-chip early-mas",
+            "step-rookie": "badge-chip step-rookie",
+            "step-strider": "badge-chip step-strider",
+            "step-sprint": "badge-chip step-sprint",
+          };
 
-                let barInnerHTML = '';
-                intern.segments.forEach(segment => {
-                    const widthPct = ((segment.len / totalDays) * 100).toFixed(4);
-                    const isFuture = segment.type === 'future';
-                    const titleText = workDays.slice(segment.start, segment.end + 1).map(date => {
-                        const dt = new Date(date + 'T00:00:00');
-                        const statusText = isFuture ? 'Belum' : (segment.type === 'absent' ? 'Tidak Hadir' : 'Hadir');
-                        return `${dayNames[dt.getDay()] || ''} ${dt.getDate()}: ${statusText}`;
-                    }).join('\n');
-                    barInnerHTML += `<div style="width:${widthPct}%;height:100%;background:${segmentColors[segment.type]};flex-shrink:0" title="${titleText}"></div>`;
-                });
+          let badgesHTML = "";
+          badgesHTML += early
+            ? `<span class="${badgeClassMap[early[0]]}">${early[1]}</span>`
+            : '<span class="badge-chip locked">🔒 Early Beginner (total 2x paling awal)</span>';
+          badgesHTML += streak
+            ? `<span class="${badgeClassMap[streak[0]]}">${streak[1]}</span>`
+            : '<span class="badge-chip locked">🔒 Step-in Rookie (3 hari)</span>';
 
-                let labelsHTML = '';
-                const labelIndexes = [0, Math.round(totalDays / 4) - 1, Math.round(totalDays / 2) - 1, Math.round((totalDays * 3) / 4) - 1, totalDays - 1];
-                new Set(labelIndexes.filter(index => index >= 0 && index < totalDays)).forEach(index => {
-                    const dt = new Date(workDays[index] + 'T00:00:00');
-                    const leftPct = (((index + 0.5) / totalDays) * 100).toFixed(2);
-                    labelsHTML += `<div style="position:absolute;left:${leftPct}%;transform:translateX(-50%);font-size:8px;color:#94a3b8;white-space:nowrap">${(dayNames[dt.getDay()] || '') + dt.getDate()}</div>`;
-                });
-
-                const early = earlyBadge(intern.earlyCount);
-                const streak = stepBadge(intern.bestStreak);
-                const badgeClassMap = {
-                    'early-bgn': 'badge-chip early-bgn',
-                    'early-nov': 'badge-chip early-nov',
-                    'early-mas': 'badge-chip early-mas',
-                    'step-rookie': 'badge-chip step-rookie',
-                    'step-strider': 'badge-chip step-strider',
-                    'step-sprint': 'badge-chip step-sprint'
-                };
-
-                let badgesHTML = '';
-                badgesHTML += early
-                    ? `<span class="${badgeClassMap[early[0]]}">${early[1]}</span>`
-                    : '<span class="badge-chip locked">🔒 Early Beginner (total 2x paling awal)</span>';
-                badgesHTML += streak
-                    ? `<span class="${badgeClassMap[streak[0]]}">${streak[1]}</span>`
-                    : '<span class="badge-chip locked">🔒 Step-in Rookie (3 hari)</span>';
-
-                const card = document.createElement('div');
-                card.className = 'intern-gami-card';
-                card.innerHTML = `
+          const card = document.createElement("div");
+          card.className = "intern-gami-card";
+          card.innerHTML = `
                     <div class="flex items-center gap-3 mb-3">
                         ${avatarHtml(intern.photo, intern.name, 38)}
                         <div class="flex-1 min-w-0">
@@ -628,9 +818,11 @@
                             <p class="text-xs text-slate-400">${intern.totalPresent}/${intern.countedDays} hari hadir (${percentage}%)</p>
                             <p class="text-xs text-slate-400 mb-0">Clock in paling awal: ${intern.earlyCount}x | Poin Quiz: ${intern.quizScore || 0} pts</p>
                         </div>
-                        ${intern.bestStreak >= 2
-                        ? `<span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:99px;background:#FEF2F2;color:#A32D2D;border:1px solid #F09595;white-space:nowrap;flex-shrink:0">Best streak: ${intern.bestStreak}x</span>`
-                        : `<span class="text-xs text-slate-400 flex-shrink-0">Streak terbaik: ${intern.bestStreak}</span>`}
+                        ${
+                          intern.bestStreak >= 2
+                            ? `<span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:99px;background:#FEF2F2;color:#A32D2D;border:1px solid #F09595;white-space:nowrap;flex-shrink:0">Best streak: ${intern.bestStreak}x</span>`
+                            : `<span class="text-xs text-slate-400 flex-shrink-0">Streak terbaik: ${intern.bestStreak}</span>`
+                        }
                     </div>
                     <div style="position:relative;margin-bottom:4px">
                         <div style="position:relative;height:22px;margin-bottom:2px">${flameRowHTML}</div>
@@ -643,14 +835,15 @@
                     </div>
                     <div class="flex flex-wrap mt-3" style="gap:4px">${badgesHTML}</div>
                 `;
-                gamiCards.appendChild(card);
-            });
+          gamiCards.appendChild(card);
+        });
 
-            const medals = ['🥇', '🥈', '🥉'];
+        const medals = ["🥇", "🥈", "🥉"];
 
-            const hdr = document.createElement('div');
-            hdr.style.cssText = 'display:grid;grid-template-columns:32px 36px 1fr 80px 80px 80px 80px 70px 70px;gap:8px;align-items:center;padding:6px 4px 8px 4px;border-bottom:2px solid #f1f5f9;';
-            hdr.innerHTML = `
+        const hdr = document.createElement("div");
+        hdr.style.cssText =
+          "display:grid;grid-template-columns:32px 36px 1fr 80px 80px 80px 80px 70px 70px;gap:8px;align-items:center;padding:6px 4px 8px 4px;border-bottom:2px solid #f1f5f9;";
+        hdr.innerHTML = `
                 <span></span><span></span>
                 <span style="font-size:10px;font-weight:800;color:#94a3b8;letter-spacing:.08em;text-transform:uppercase">Nama</span>
                 <span style="font-size:10px;font-weight:800;color:#94a3b8;letter-spacing:.08em;text-transform:uppercase;text-align:center">Total Pts</span>
@@ -660,18 +853,24 @@
                 <span style="font-size:10px;font-weight:800;color:#10b981;letter-spacing:.08em;text-transform:uppercase;text-align:center">✅ Quest</span>
                 <span style="font-size:10px;font-weight:800;color:#94a3b8;letter-spacing:.08em;text-transform:uppercase;text-align:center">Hadir</span>
             `;
-            gamiLeaderboard.appendChild(hdr);
+        gamiLeaderboard.appendChild(hdr);
 
-            leaderboardRows.forEach((intern, index) => {
-                const totalPts = intern.earlyCount + intern.bestStreak + (intern.quizScore || 0) + (intern.questPoints || 0);
-                const earlyTiebreakerLabel = intern.earlyCount > 0
-                    ? `<div style="font-size:9px;color:#f59e0b;margin-top:1px" title="Capai ${intern.earlyCount}x early per ${intern.earlyTiebreakerDate}">${intern.earlyTiebreakerDate}</div>`
-                    : '<div style="font-size:9px;color:#cbd5e1">-</div>';
-                const row = document.createElement('div');
-                row.style.cssText = 'display:grid;grid-template-columns:32px 36px 1fr 80px 80px 80px 80px 70px 70px;gap:8px;align-items:center;padding:9px 4px;border-bottom:1px solid #f8fafc;';
-                if (index % 2 === 0) row.style.background = '#fafbff';
-                row.innerHTML = `
-                    <span style="font-size:${index < 3 ? '20' : '12'}px;font-weight:700;text-align:center;line-height:1">${medals[index] || index + 1}</span>
+        leaderboardRows.forEach((intern, index) => {
+          const totalPts =
+            intern.earlyCount +
+            intern.bestStreak +
+            (intern.quizScore || 0) +
+            (intern.questPoints || 0);
+          const earlyTiebreakerLabel =
+            intern.earlyCount > 0
+              ? `<div style="font-size:9px;color:#f59e0b;margin-top:1px" title="Capai ${intern.earlyCount}x early per ${intern.earlyTiebreakerDate}">${intern.earlyTiebreakerDate}</div>`
+              : '<div style="font-size:9px;color:#cbd5e1">-</div>';
+          const row = document.createElement("div");
+          row.style.cssText =
+            "display:grid;grid-template-columns:32px 36px 1fr 80px 80px 80px 80px 70px 70px;gap:8px;align-items:center;padding:9px 4px;border-bottom:1px solid #f8fafc;";
+          if (index % 2 === 0) row.style.background = "#fafbff";
+          row.innerHTML = `
+                    <span style="font-size:${index < 3 ? "20" : "12"}px;font-weight:700;text-align:center;line-height:1">${medals[index] || index + 1}</span>
                     ${avatarHtml(intern.photo, intern.name, 32)}
                     <span style="font-size:13px;font-weight:600;color:#0f172a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${intern.name}</span>
                     <div style="text-align:center">
@@ -683,7 +882,7 @@
                         ${earlyTiebreakerLabel}
                     </div>
                     <div style="text-align:center">
-                        <span style="font-size:13px;font-weight:700;color:${intern.bestStreak >= 2 ? '#E24B4A' : '#94a3b8'}">${intern.bestStreak}x</span>
+                        <span style="font-size:13px;font-weight:700;color:${intern.bestStreak >= 2 ? "#E24B4A" : "#94a3b8"}">${intern.bestStreak}x</span>
                         <div style="font-size:9px;color:#94a3b8">best</div>
                     </div>
                     <div style="text-align:center">
@@ -699,647 +898,1070 @@
                         <div style="font-size:9px;color:#94a3b8">hari</div>
                     </div>
                 `;
-                gamiLeaderboard.appendChild(row);
-            });
-        }
-
-        async function loadGamification(monthKey) {
-            if (!monthKey || !gamiEmpty) return;
-            gamiEmpty.textContent = 'Memuat data gamifikasi bulan ini...';
-            gamiEmpty.classList.remove('hidden');
-            if (gamiLdrEmpty) gamiLdrEmpty.classList.add('hidden');
-
-            try {
-                const range = getMonthRangeFromMonthKey(monthKey);
-                
-                // Fetch attendance
-                const qMonth = query(
-                    collection(db, 'user_attendance'),
-                    where('date', '>=', range.startKey),
-                    where('date', '<=', range.endKey)
-                );
-                
-                // Fetch quiz results for this month
-                const startOfM = new Date(range.startKey + 'T00:00:00');
-                const endOfM = new Date(range.endKey + 'T23:59:59');
-                const qQuiz = query(
-                    collection(db, 'quiz_results'),
-                    where('completed_at', '>=', startOfM),
-                    where('completed_at', '<=', endOfM)
-                );
-
-                const qReports = query(
-                    collection(db, 'intern_dailyreport'),
-                    where('status', 'in', ['Approved', 'Partially Approved'])
-                );
-
-                const [snap, quizSnap, reportSnap] = await Promise.all([
-                    getDocs(qMonth),
-                    getDocs(qQuiz),
-                    getDocs(qReports)
-                ]);
-
-                const rows = [];
-                snap.forEach(docSnap => {
-                    const d = docSnap.data() || {};
-                    rows.push({
-                        user_id: d.user_id || '',
-                        name: d.name || '',
-                        date: d.date || '',
-                        time: d.time || '',
-                        type: d.type || ''
-                    });
-                });
-                
-                const qResults = [];
-                quizSnap.forEach(docSnap => {
-                    const d = docSnap.data() || {};
-                    qResults.push({
-                        user_id: d.user_id || '',
-                        score: d.score || 0
-                    });
-                });
-
-                const approvedReports = [];
-                reportSnap.forEach(docSnap => {
-                    const d = docSnap.data() || {};
-                    // Filter client-side berdasarkan report_date agar sesuai bulan aktif
-                    const rDate = d.report_date; // Format string YYYY-MM-DD
-                    if (rDate && rDate >= range.startKey && rDate <= range.endKey) {
-                        approvedReports.push({
-                            user_id: d.user_id || '',
-                            tasks: d.tasks || []
-                        });
-                    }
-                });
-
-                allAttendanceRecords = rows;
-                allQuizResults = qResults;
-                allApprovedDailyReports = approvedReports;
-                renderGamification(monthKey);
-            } catch (error) {
-                console.error('Gagal memuat gamifikasi:', error);
-                allAttendanceRecords = [];
-                gamiCards.innerHTML = '';
-                gamiLeaderboard.innerHTML = '';
-                gamiEmpty.textContent = 'Gagal memuat data gamifikasi.';
-                gamiEmpty.classList.remove('hidden');
-                if (gamiLdrEmpty) gamiLdrEmpty.classList.remove('hidden');
-            }
-        }
-
-        async function loadInterns() {
-            const qIntern = query(collection(db, 'users'), where('access.role_id', '==', 'internship'), where("status", "==", "Active"));
-            const snap = await getDocs(qIntern);
-            const users = [];
-            snap.forEach(docSnap => {
-                const d = docSnap.data() || {};
-                users.push({
-                    id: docSnap.id,
-                    name: d.name || d.email || 'Tanpa Nama',
-                    photo: d.photo || '',
-                    mode: d.mode || 'WFO'
-                });
-            });
-            users.sort((a, b) => a.name.localeCompare(b.name));
-            allInterns = users;
-        }
-
-        async function init() {
-            const todayKey = getTodayKey();
-            const monthKey = getMonthKeyFromDate(todayKey);
-            if (gamiMonthFilter) gamiMonthFilter.value = monthKey;
-            const hasAccess = await checkAccess();
-            const kelolaBtn = document.getElementById('kelolaQuizBtn');
-            if (kelolaBtn) kelolaBtn.classList.toggle('hidden', !hasAccess);
-            await loadInterns();
-            await loadGamification(gamiMonthFilter ? gamiMonthFilter.value : monthKey);
-        }
-
-        if (gamiMonthFilter) {
-            gamiMonthFilter.addEventListener('change', async () => {
-                const monthKey = gamiMonthFilter.value || getMonthKeyFromDate(getTodayKey());
-                await loadGamification(monthKey);
-            });
-        }
-
-        document.querySelectorAll('.gami-tab').forEach(button => {
-            button.addEventListener('click', () => {
-                document.querySelectorAll('.gami-tab').forEach(tab => tab.classList.remove('active'));
-                button.classList.add('active');
-                document.getElementById('gamiTabProgress').classList.add('hidden');
-                document.getElementById('gamiTabLeaderboard').classList.add('hidden');
-                document.getElementById('gamiTabLegend').classList.add('hidden');
-                const targetId = `gamiTab${button.dataset.tab.charAt(0).toUpperCase()}${button.dataset.tab.slice(1)}`;
-                document.getElementById(targetId).classList.remove('hidden');
-            });
+          gamiLeaderboard.appendChild(row);
         });
+      }
 
-        init().catch((e) => {
-            console.error('Init gagal:', e);
-        });
+      async function loadGamification(monthKey) {
+        if (!monthKey || !gamiEmpty) return;
+        gamiEmpty.textContent = "Memuat data gamifikasi bulan ini...";
+        gamiEmpty.classList.remove("hidden");
+        if (gamiLdrEmpty) gamiLdrEmpty.classList.add("hidden");
 
-        async function checkAccess() {
-            let userData = null;
-            try { userData = JSON.parse(localStorage.getItem('userData') || 'null'); } catch (e) {}
-            const userId = userData?.uid || localStorage.getItem('userId');
-            if (!userId) return false;
-            try {
-                const userDoc = await getDoc(doc(db, 'users', userId));
-                if (!userDoc.exists()) return false;
-                const data = userDoc.data();
-                const allowedPositions = ['gtebWhJ7db4xxHQxI67t', 'Head of Department of Happy Team', '3jlfwya0KQuAk5Twkike'];
-                return allowedPositions.includes(data?.employment?.position) || allowedPositions.includes(data?.position);
-            } catch (e) {
-                console.error("Error checking access:", e);
-                return false;
-            }
-        }
-        let questions = [];
-        let editingQuizId = null;
-        let deleteTargetId = null;
-        const quizScheduleRef = doc(db, 'quiz_settings', 'schedule');
+        try {
+          const range = getMonthRangeFromMonthKey(monthKey);
 
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
+          // Fetch attendance
+          const qMonth = query(
+            collection(db, "user_attendance"),
+            where("date", ">=", range.startKey),
+            where("date", "<=", range.endKey),
+          );
 
-        function resetQuizForm() {
-            const form = document.getElementById('quizForm');
-            if (form) form.reset();
-            document.getElementById('quizFormId').value = '';
-            document.querySelectorAll('#quizForm .form-control').forEach(el => el.classList.remove('is-invalid'));
-            document.querySelectorAll('.correct-answer-feedback').forEach(el => el.classList.add('hidden'));
-            editingQuizId = null;
-        }
+          // Fetch quiz results for this month
+          const startOfM = new Date(range.startKey + "T00:00:00");
+          const endOfM = new Date(range.endKey + "T23:59:59");
+          const qQuiz = query(
+            collection(db, "quiz_results"),
+            where("completed_at", ">=", startOfM),
+            where("completed_at", "<=", endOfM),
+          );
 
-        function getQuizFormData() {
-            return {
-                question: document.getElementById('quizQuestion').value.trim(),
-                options: {
-                    A: document.getElementById('quizOptionA').value.trim(),
-                    B: document.getElementById('quizOptionB').value.trim(),
-                    C: document.getElementById('quizOptionC').value.trim(),
-                    D: document.getElementById('quizOptionD').value.trim()
-                },
-                correctAnswer: document.querySelector('[name="correctAnswer"]:checked')?.value || ''
-            };
-        }
+          const qReports = query(
+            collection(db, "intern_dailyreport"),
+            where("status", "in", ["Approved", "Partially Approved"]),
+          );
 
-        function validateQuizForm(data) {
-            let isValid = true;
-            document.querySelectorAll('#quizForm .form-control').forEach(el => el.classList.remove('is-invalid'));
-            document.querySelectorAll('.correct-answer-feedback').forEach(el => el.classList.add('hidden'));
+          const [snap, quizSnap, reportSnap] = await Promise.all([
+            getDocs(qMonth),
+            getDocs(qQuiz),
+            getDocs(qReports),
+          ]);
 
-            if (!data.question) {
-                document.getElementById('quizQuestion').classList.add('is-invalid');
-                isValid = false;
-            }
-            ['A', 'B', 'C', 'D'].forEach(key => {
-                if (!data.options[key]) {
-                    document.getElementById('quizOption' + key).classList.add('is-invalid');
-                    isValid = false;
-                }
+          const rows = [];
+          snap.forEach((docSnap) => {
+            const d = docSnap.data() || {};
+            rows.push({
+              user_id: d.user_id || "",
+              name: d.name || "",
+              date: d.date || "",
+              time: d.time || "",
+              type: d.type || "",
             });
-            if (!data.correctAnswer) {
-                document.querySelectorAll('.correct-answer-feedback').forEach(el => el.classList.remove('hidden'));
-                isValid = false;
+          });
+
+          const qResults = [];
+          quizSnap.forEach((docSnap) => {
+            const d = docSnap.data() || {};
+            qResults.push({
+              user_id: d.user_id || "",
+              score: d.score || 0,
+            });
+          });
+
+          const approvedReports = [];
+          reportSnap.forEach((docSnap) => {
+            const d = docSnap.data() || {};
+            // Filter client-side berdasarkan report_date agar sesuai bulan aktif
+            const rDate = d.report_date; // Format string YYYY-MM-DD
+            if (rDate && rDate >= range.startKey && rDate <= range.endKey) {
+              approvedReports.push({
+                user_id: d.user_id || "",
+                tasks: d.tasks || [],
+              });
             }
-            return isValid;
+          });
+
+          allAttendanceRecords = rows;
+          allQuizResults = qResults;
+          allApprovedDailyReports = approvedReports;
+          renderGamification(monthKey);
+        } catch (error) {
+          console.error("Gagal memuat gamifikasi:", error);
+          allAttendanceRecords = [];
+          gamiCards.innerHTML = "";
+          gamiLeaderboard.innerHTML = "";
+          gamiEmpty.textContent = "Gagal memuat data gamifikasi.";
+          gamiEmpty.classList.remove("hidden");
+          if (gamiLdrEmpty) gamiLdrEmpty.classList.remove("hidden");
+        }
+      }
+
+      async function loadInterns() {
+        const qIntern = query(
+          collection(db, "users"),
+          where("access.role_id", "==", "internship"),
+          where("status", "==", "Active"),
+        );
+        const snap = await getDocs(qIntern);
+        const users = [];
+        snap.forEach((docSnap) => {
+          const d = docSnap.data() || {};
+          users.push({
+            id: docSnap.id,
+            name: d.name || d.email || "Tanpa Nama",
+            photo: d.photo || "",
+            mode: d.mode || "WFO",
+          });
+        });
+        users.sort((a, b) => a.name.localeCompare(b.name));
+        allInterns = users;
+      }
+
+      async function init() {
+        const todayKey = getTodayKey();
+        const monthKey = getMonthKeyFromDate(todayKey);
+        if (gamiMonthFilter) gamiMonthFilter.value = monthKey;
+        const hasAccess = await checkAccess();
+        const kelolaBtn = document.getElementById("kelolaQuizBtn");
+        if (kelolaBtn) kelolaBtn.classList.toggle("hidden", !hasAccess);
+        await loadInterns();
+        await loadGamification(
+          gamiMonthFilter ? gamiMonthFilter.value : monthKey,
+        );
+      }
+
+      if (gamiMonthFilter) {
+        gamiMonthFilter.addEventListener("change", async () => {
+          const monthKey =
+            gamiMonthFilter.value || getMonthKeyFromDate(getTodayKey());
+          await loadGamification(monthKey);
+        });
+      }
+
+      document.querySelectorAll(".gami-tab").forEach((button) => {
+        button.addEventListener("click", () => {
+          document
+            .querySelectorAll(".gami-tab")
+            .forEach((tab) => tab.classList.remove("active"));
+          button.classList.add("active");
+          document.getElementById("gamiTabProgress").classList.add("hidden");
+          document.getElementById("gamiTabLeaderboard").classList.add("hidden");
+          document.getElementById("gamiTabLegend").classList.add("hidden");
+          const targetId = `gamiTab${button.dataset.tab.charAt(0).toUpperCase()}${button.dataset.tab.slice(1)}`;
+          document.getElementById(targetId).classList.remove("hidden");
+        });
+      });
+
+      init().catch((e) => {
+        console.error("Init gagal:", e);
+      });
+
+      async function checkAccess() {
+        let userData = null;
+        try {
+          userData = JSON.parse(localStorage.getItem("userData") || "null");
+        } catch (e) {}
+        const userId = userData?.uid || localStorage.getItem("userId");
+        if (!userId) return false;
+        try {
+          const userDoc = await getDoc(doc(db, "users", userId));
+          if (!userDoc.exists()) return false;
+          const data = userDoc.data();
+          const allowedPositions = [
+            "gtebWhJ7db4xxHQxI67t",
+            "Head of Department of Happy Team",
+            "3jlfwya0KQuAk5Twkike",
+          ];
+          return (
+            allowedPositions.includes(data?.employment?.position) ||
+            allowedPositions.includes(data?.position)
+          );
+        } catch (e) {
+          console.error("Error checking access:", e);
+          return false;
+        }
+      }
+      let questions = [];
+      let editingQuizId = null;
+      let deleteTargetId = null;
+      const quizScheduleRef = doc(db, "quiz_settings", "schedule");
+
+      function escapeHtml(text) {
+        const div = document.createElement("div");
+        div.textContent = text;
+        return div.innerHTML;
+      }
+
+      function resetQuizForm() {
+        const form = document.getElementById("quizForm");
+        if (form) form.reset();
+        document.getElementById("quizFormId").value = "";
+        document
+          .querySelectorAll("#quizForm .form-control")
+          .forEach((el) => el.classList.remove("is-invalid"));
+        document
+          .querySelectorAll(".correct-answer-feedback")
+          .forEach((el) => el.classList.add("hidden"));
+        editingQuizId = null;
+      }
+
+      function getQuizFormData() {
+        return {
+          question: document.getElementById("quizQuestion").value.trim(),
+          options: {
+            A: document.getElementById("quizOptionA").value.trim(),
+            B: document.getElementById("quizOptionB").value.trim(),
+            C: document.getElementById("quizOptionC").value.trim(),
+            D: document.getElementById("quizOptionD").value.trim(),
+          },
+          correctAnswer:
+            document.querySelector('[name="correctAnswer"]:checked')?.value ||
+            "",
+        };
+      }
+
+      function validateQuizForm(data) {
+        let isValid = true;
+        document
+          .querySelectorAll("#quizForm .form-control")
+          .forEach((el) => el.classList.remove("is-invalid"));
+        document
+          .querySelectorAll(".correct-answer-feedback")
+          .forEach((el) => el.classList.add("hidden"));
+
+        if (!data.question) {
+          document.getElementById("quizQuestion").classList.add("is-invalid");
+          isValid = false;
+        }
+        ["A", "B", "C", "D"].forEach((key) => {
+          if (!data.options[key]) {
+            document
+              .getElementById("quizOption" + key)
+              .classList.add("is-invalid");
+            isValid = false;
+          }
+        });
+        if (!data.correctAnswer) {
+          document
+            .querySelectorAll(".correct-answer-feedback")
+            .forEach((el) => el.classList.remove("hidden"));
+          isValid = false;
+        }
+        return isValid;
+      }
+
+      function setFormLoading(loading) {
+        document
+          .getElementById("simpanSoalText")
+          .classList.toggle("hidden", loading);
+        document
+          .getElementById("simpanSoalLoading")
+          .classList.toggle("hidden", !loading);
+        document.getElementById("simpanSoalBtn").disabled = loading;
+      }
+
+      function showQuizListView() {
+        document.getElementById("quizListView").classList.remove("hidden");
+        document.getElementById("quizFormView").classList.add("hidden");
+        document.getElementById("quizScheduleView").classList.add("hidden");
+        document.getElementById("quizModalLabel").textContent =
+          "Manajemen Soal Pilihan Ganda";
+      }
+
+      function showQuizFormView(title) {
+        document.getElementById("quizListView").classList.add("hidden");
+        document.getElementById("quizFormView").classList.remove("hidden");
+        document.getElementById("quizScheduleView").classList.add("hidden");
+        document.getElementById("quizModalLabel").textContent = title;
+      }
+
+      function showQuizScheduleView() {
+        document.getElementById("quizListView").classList.add("hidden");
+        document.getElementById("quizFormView").classList.add("hidden");
+        document.getElementById("quizScheduleView").classList.remove("hidden");
+        document.getElementById("quizModalLabel").textContent =
+          "Atur Jadwal Quiz";
+      }
+
+      function showAddForm() {
+        resetQuizForm();
+        showQuizFormView("Tambah Pertanyaan Baru");
+      }
+
+      function editQuestion(id) {
+        const q = questions.find((item) => item.id === id);
+        if (!q) return;
+        resetQuizForm();
+        editingQuizId = id;
+        document.getElementById("quizFormId").value = id;
+        document.getElementById("quizQuestion").value = q.question || "";
+        document.getElementById("quizOptionA").value = q.options?.A || "";
+        document.getElementById("quizOptionB").value = q.options?.B || "";
+        document.getElementById("quizOptionC").value = q.options?.C || "";
+        document.getElementById("quizOptionD").value = q.options?.D || "";
+        const correctAnswer = q.correct_answer || "";
+        const radio = document.querySelector(
+          '[name="correctAnswer"][value="' + correctAnswer + '"]',
+        );
+        if (radio) radio.checked = true;
+        showQuizFormView("Edit Pertanyaan");
+      }
+
+      async function saveQuestion(event) {
+        event.preventDefault();
+        const data = getQuizFormData();
+        if (!validateQuizForm(data)) return;
+        setFormLoading(true);
+        try {
+          const payload = {
+            question: data.question,
+            options: data.options,
+            correct_answer: data.correctAnswer,
+            updated_at: serverTimestamp(),
+          };
+          if (editingQuizId) {
+            await updateDoc(doc(db, "intern_quizz", editingQuizId), payload);
+          } else {
+            payload.created_at = serverTimestamp();
+            await addDoc(collection(db, "intern_quizz"), payload);
+          }
+          showQuizListView();
+          await loadQuestions();
+          resetQuizForm();
+        } catch (error) {
+          console.error("Gagal menyimpan soal:", error);
+          alert("Gagal menyimpan soal. Silakan coba lagi.");
+        } finally {
+          setFormLoading(false);
+        }
+      }
+
+      function showDeleteConfirmation(id) {
+        deleteTargetId = id;
+        const modal = new bootstrap.Modal(
+          document.getElementById("deleteQuizModal"),
+        );
+        modal.show();
+      }
+
+      async function confirmDelete() {
+        if (!deleteTargetId) return;
+        document.getElementById("deleteText").classList.add("hidden");
+        document.getElementById("deleteLoading").classList.remove("hidden");
+        document.getElementById("confirmDeleteBtn").disabled = true;
+        try {
+          await deleteDoc(doc(db, "intern_quizz", deleteTargetId));
+          bootstrap.Modal.getInstance(
+            document.getElementById("deleteQuizModal"),
+          ).hide();
+          await loadQuestions();
+        } catch (error) {
+          console.error("Gagal menghapus soal:", error);
+          alert("Gagal menghapus soal. Silakan coba lagi.");
+        } finally {
+          document.getElementById("deleteText").classList.remove("hidden");
+          document.getElementById("deleteLoading").classList.add("hidden");
+          document.getElementById("confirmDeleteBtn").disabled = false;
+          deleteTargetId = null;
+        }
+      }
+
+      function toDatetimeLocalValue(value) {
+        if (!value) return "";
+        const date = value?.toDate ? value.toDate() : new Date(value);
+        if (Number.isNaN(date.getTime())) return "";
+        const pad = (n) => String(n).padStart(2, "0");
+        return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
+      }
+
+      function formatScheduleInfo(openAt, closeAt) {
+        if (!openAt || !closeAt)
+          return '<span class="text-xs text-slate-400">Jadwal belum diatur</span>';
+        const openDate = openAt?.toDate ? openAt.toDate() : new Date(openAt);
+        const closeDate = closeAt?.toDate
+          ? closeAt.toDate()
+          : new Date(closeAt);
+        if (
+          Number.isNaN(openDate.getTime()) ||
+          Number.isNaN(closeDate.getTime())
+        ) {
+          return '<span class="text-xs text-slate-400">Jadwal belum valid</span>';
+        }
+        return (
+          '<div class="text-xs" style="color:#475569">' +
+          '<div><span class="fw-semibold">Buka:</span> ' +
+          openDate.toLocaleString("id-ID") +
+          "</div>" +
+          '<div><span class="fw-semibold">Tutup:</span> ' +
+          closeDate.toLocaleString("id-ID") +
+          "</div>" +
+          "</div>"
+        );
+      }
+
+      async function loadQuizSchedule() {
+        const info = document.getElementById("quizScheduleInfo");
+        const openInput = document.getElementById("quizOpenAt");
+        const closeInput = document.getElementById("quizCloseAt");
+        if (info)
+          info.innerHTML =
+            '<span class="text-xs text-slate-400">Memuat jadwal...</span>';
+        try {
+          const snap = await getDoc(quizScheduleRef);
+          if (!snap.exists()) {
+            if (openInput) openInput.value = "";
+            if (closeInput) closeInput.value = "";
+            if (info)
+              info.innerHTML =
+                '<span class="text-xs text-slate-400">Belum ada jadwal quiz aktif.</span>';
+            return null;
+          }
+          const data = snap.data() || {};
+          if (openInput) openInput.value = toDatetimeLocalValue(data.open_at);
+          if (closeInput)
+            closeInput.value = toDatetimeLocalValue(data.close_at);
+          if (info)
+            info.innerHTML = formatScheduleInfo(data.open_at, data.close_at);
+          return data;
+        } catch (error) {
+          console.error("Gagal memuat jadwal quiz:", error);
+          if (info)
+            info.innerHTML =
+              '<span class="text-xs" style="color:#dc2626">Gagal memuat jadwal quiz.</span>';
+          return null;
+        }
+      }
+
+      async function saveQuizSchedule(event) {
+        event.preventDefault();
+        const openValue = document.getElementById("quizOpenAt").value;
+        const closeValue = document.getElementById("quizCloseAt").value;
+        const feedback = document.getElementById("quizScheduleFeedback");
+        const saveText = document.getElementById("saveScheduleText");
+        const saveLoading = document.getElementById("saveScheduleLoading");
+        const saveBtn = document.getElementById("saveScheduleBtn");
+
+        if (feedback) {
+          feedback.classList.add("hidden");
+          feedback.textContent = "";
         }
 
-        function setFormLoading(loading) {
-            document.getElementById('simpanSoalText').classList.toggle('hidden', loading);
-            document.getElementById('simpanSoalLoading').classList.toggle('hidden', !loading);
-            document.getElementById('simpanSoalBtn').disabled = loading;
+        if (!openValue || !closeValue) {
+          if (feedback) {
+            feedback.textContent = "Waktu buka dan tutup wajib diisi.";
+            feedback.classList.remove("hidden");
+          }
+          return;
         }
 
-        function showQuizListView() {
-            document.getElementById('quizListView').classList.remove('hidden');
-            document.getElementById('quizFormView').classList.add('hidden');
-            document.getElementById('quizScheduleView').classList.add('hidden');
-            document.getElementById('quizModalLabel').textContent = 'Manajemen Soal Pilihan Ganda';
+        const openDate = new Date(openValue);
+        const closeDate = new Date(closeValue);
+        if (
+          Number.isNaN(openDate.getTime()) ||
+          Number.isNaN(closeDate.getTime()) ||
+          closeDate <= openDate
+        ) {
+          if (feedback) {
+            feedback.textContent =
+              "Waktu tutup harus lebih besar dari waktu buka.";
+            feedback.classList.remove("hidden");
+          }
+          return;
         }
 
-        function showQuizFormView(title) {
-            document.getElementById('quizListView').classList.add('hidden');
-            document.getElementById('quizFormView').classList.remove('hidden');
-            document.getElementById('quizScheduleView').classList.add('hidden');
-            document.getElementById('quizModalLabel').textContent = title;
+        saveBtn.disabled = true;
+        saveText.classList.add("hidden");
+        saveLoading.classList.remove("hidden");
+        try {
+          await setDoc(
+            quizScheduleRef,
+            {
+              open_at: Timestamp.fromDate(openDate),
+              close_at: Timestamp.fromDate(closeDate),
+              updated_at: serverTimestamp(),
+            },
+            { merge: true },
+          );
+          await loadQuizSchedule();
+          showQuizListView();
+        } catch (error) {
+          console.error("Gagal menyimpan jadwal quiz:", error);
+          if (feedback) {
+            feedback.textContent = "Gagal menyimpan jadwal quiz.";
+            feedback.classList.remove("hidden");
+          }
+        } finally {
+          saveBtn.disabled = false;
+          saveText.classList.remove("hidden");
+          saveLoading.classList.add("hidden");
         }
+      }
 
-        function showQuizScheduleView() {
-            document.getElementById('quizListView').classList.add('hidden');
-            document.getElementById('quizFormView').classList.add('hidden');
-            document.getElementById('quizScheduleView').classList.remove('hidden');
-            document.getElementById('quizModalLabel').textContent = 'Atur Jadwal Quiz';
+      async function loadQuestions() {
+        const container = document.getElementById("quizTableContainer");
+        container.innerHTML =
+          '<p class="text-xs text-slate-400">Memuat data...</p>';
+        try {
+          const q = query(
+            collection(db, "intern_quizz"),
+            orderBy("created_at", "desc"),
+          );
+          const snap = await getDocs(q);
+          questions = [];
+          snap.forEach((docSnap) => {
+            questions.push({ id: docSnap.id, ...docSnap.data() });
+          });
+          renderQuestions();
+        } catch (error) {
+          console.error("Gagal memuat soal:", error);
+          container.innerHTML =
+            '<p class="text-xs" style="color:#dc2626">Gagal memuat data soal.</p>';
         }
+      }
 
-        function showAddForm() {
-            resetQuizForm();
-            showQuizFormView('Tambah Pertanyaan Baru');
+      function renderQuestions() {
+        const container = document.getElementById("quizTableContainer");
+        if (!questions.length) {
+          container.innerHTML =
+            '<div class="text-center py-5"><i class="bi bi-inbox" style="font-size:40px;color:#cbd5e1"></i><p class="text-xs mt-2" style="color:#94a3b8">Belum ada soal. Klik "Tambah Pertanyaan" untuk memulai.</p></div>';
+          return;
         }
+        let html = '<div style="overflow-x:auto">';
+        html +=
+          '<table class="table table-sm align-middle mb-0" style="font-size:13px">';
+        html += '<thead><tr style="border-bottom:2px solid #f1f5f9">';
+        html +=
+          '<th style="color:#94a3b8;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:8px 6px">No</th>';
+        html +=
+          '<th style="color:#94a3b8;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:8px 6px">Pertanyaan</th>';
+        html +=
+          '<th style="color:#94a3b8;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:8px 6px">Pilihan</th>';
+        html +=
+          '<th style="color:#94a3b8;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:8px 6px">Jawaban</th>';
+        html +=
+          '<th style="color:#94a3b8;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:8px 6px;width:100px">Aksi</th>';
+        html += "</tr></thead><tbody>";
+        questions.forEach((q, i) => {
+          const optionsList = ["A", "B", "C", "D"]
+            .map(function (key) {
+              return (
+                '<span style="font-size:12px">' +
+                key +
+                ". " +
+                escapeHtml(q.options?.[key] || "") +
+                "</span>"
+              );
+            })
+            .join("<br>");
+          html += '<tr style="border-bottom:1px solid #f8fafc">';
+          html +=
+            '<td style="padding:10px 6px;color:#64748b;font-weight:600">' +
+            (i + 1) +
+            "</td>";
+          html +=
+            '<td style="padding:10px 6px;color:#0f172a;font-weight:500;max-width:300px">' +
+            escapeHtml(q.question || "") +
+            "</td>";
+          html +=
+            '<td style="padding:10px 6px;color:#475569">' +
+            optionsList +
+            "</td>";
+          html +=
+            '<td style="padding:10px 6px"><span style="background:#dbeafe;color:#1e40af;font-size:11px;font-weight:600;padding:4px 10px;border-radius:999px;display:inline-block">' +
+            (q.correct_answer || "-") +
+            "</span></td>";
+          html += '<td style="padding:10px 6px;white-space:nowrap">';
+          html +=
+            '<button class="edit-quiz-btn btn btn-sm p-1 border-0" data-id="' +
+            q.id +
+            '" style="color:#2563eb" title="Edit"><i class="bi bi-pencil"></i></button>';
+          html +=
+            '<button class="delete-quiz-btn btn btn-sm p-1 border-0" data-id="' +
+            q.id +
+            '" style="color:#dc2626" title="Hapus"><i class="bi bi-trash"></i></button>';
+          html += "</td></tr>";
+        });
+        html += "</tbody></table></div>";
+        container.innerHTML = html;
+        container.querySelectorAll(".edit-quiz-btn").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            editQuestion(btn.dataset.id);
+          });
+        });
+        container.querySelectorAll(".delete-quiz-btn").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            showDeleteConfirmation(btn.dataset.id);
+          });
+        });
+      }
 
-        function editQuestion(id) {
-            const q = questions.find(item => item.id === id);
-            if (!q) return;
-            resetQuizForm();
-            editingQuizId = id;
-            document.getElementById('quizFormId').value = id;
-            document.getElementById('quizQuestion').value = q.question || '';
-            document.getElementById('quizOptionA').value = q.options?.A || '';
-            document.getElementById('quizOptionB').value = q.options?.B || '';
-            document.getElementById('quizOptionC').value = q.options?.C || '';
-            document.getElementById('quizOptionD').value = q.options?.D || '';
-            const correctAnswer = q.correct_answer || '';
-            const radio = document.querySelector('[name="correctAnswer"][value="' + correctAnswer + '"]');
-            if (radio) radio.checked = true;
-            showQuizFormView('Edit Pertanyaan');
-        }
-
-        async function saveQuestion(event) {
-            event.preventDefault();
-            const data = getQuizFormData();
-            if (!validateQuizForm(data)) return;
-            setFormLoading(true);
-            try {
-                const payload = {
-                    question: data.question,
-                    options: data.options,
-                    correct_answer: data.correctAnswer,
-                    updated_at: serverTimestamp()
-                };
-                if (editingQuizId) {
-                    await updateDoc(doc(db, 'intern_quizz', editingQuizId), payload);
-                } else {
-                    payload.created_at = serverTimestamp();
-                    await addDoc(collection(db, 'intern_quizz'), payload);
-                }
-                showQuizListView();
-                await loadQuestions();
-                resetQuizForm();
-            } catch (error) {
-                console.error('Gagal menyimpan soal:', error);
-                alert('Gagal menyimpan soal. Silakan coba lagi.');
-            } finally {
-                setFormLoading(false);
-            }
-        }
-
-        function showDeleteConfirmation(id) {
-            deleteTargetId = id;
-            const modal = new bootstrap.Modal(document.getElementById('deleteQuizModal'));
+      function initQuizModule() {
+        const kelolaBtn = document.getElementById("kelolaQuizBtn");
+        if (kelolaBtn) {
+          kelolaBtn.addEventListener("click", async function () {
+            const modal = new bootstrap.Modal(
+              document.getElementById("quizModal"),
+            );
             modal.show();
+            await loadQuestions();
+            await loadQuizSchedule();
+          });
+        }
+        const tambahBtn = document.getElementById("tambahSoalBtn");
+        if (tambahBtn) tambahBtn.addEventListener("click", showAddForm);
+        const batalBtn = document.getElementById("batalFormBtn");
+        if (batalBtn) {
+          batalBtn.addEventListener("click", function () {
+            showQuizListView();
+            resetQuizForm();
+          });
+        }
+        const quizForm = document.getElementById("quizForm");
+        if (quizForm) quizForm.addEventListener("submit", saveQuestion);
+        const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
+        if (confirmDeleteBtn)
+          confirmDeleteBtn.addEventListener("click", confirmDelete);
+        const quizModal = document.getElementById("quizModal");
+        if (quizModal) {
+          quizModal.addEventListener("hidden.bs.modal", function () {
+            showQuizListView();
+            resetQuizForm();
+          });
         }
 
-        async function confirmDelete() {
-            if (!deleteTargetId) return;
-            document.getElementById('deleteText').classList.add('hidden');
-            document.getElementById('deleteLoading').classList.remove('hidden');
-            document.getElementById('confirmDeleteBtn').disabled = true;
-            try {
-                await deleteDoc(doc(db, 'intern_quizz', deleteTargetId));
-                bootstrap.Modal.getInstance(document.getElementById('deleteQuizModal')).hide();
-                await loadQuestions();
-            } catch (error) {
-                console.error('Gagal menghapus soal:', error);
-                alert('Gagal menghapus soal. Silakan coba lagi.');
-            } finally {
-                document.getElementById('deleteText').classList.remove('hidden');
-                document.getElementById('deleteLoading').classList.add('hidden');
-                document.getElementById('confirmDeleteBtn').disabled = false;
-                deleteTargetId = null;
-            }
+        const aturJadwalBtn = document.getElementById("aturJadwalBtn");
+        if (aturJadwalBtn) {
+          aturJadwalBtn.addEventListener("click", function () {
+            showQuizScheduleView();
+          });
         }
-
-        function toDatetimeLocalValue(value) {
-            if (!value) return '';
-            const date = value?.toDate ? value.toDate() : new Date(value);
-            if (Number.isNaN(date.getTime())) return '';
-            const pad = (n) => String(n).padStart(2, '0');
-            return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
+        const batalScheduleBtn = document.getElementById("batalScheduleBtn");
+        if (batalScheduleBtn) {
+          batalScheduleBtn.addEventListener("click", function () {
+            showQuizListView();
+          });
         }
+        const quizScheduleForm = document.getElementById("quizScheduleForm");
+        if (quizScheduleForm)
+          quizScheduleForm.addEventListener("submit", saveQuizSchedule);
+      }
 
-        function formatScheduleInfo(openAt, closeAt) {
-            if (!openAt || !closeAt) return '<span class="text-xs text-slate-400">Jadwal belum diatur</span>';
-            const openDate = openAt?.toDate ? openAt.toDate() : new Date(openAt);
-            const closeDate = closeAt?.toDate ? closeAt.toDate() : new Date(closeAt);
-            if (Number.isNaN(openDate.getTime()) || Number.isNaN(closeDate.getTime())) {
-                return '<span class="text-xs text-slate-400">Jadwal belum valid</span>';
-            }
-            return '<div class="text-xs" style="color:#475569">' +
-                '<div><span class="fw-semibold">Buka:</span> ' + openDate.toLocaleString('id-ID') + '</div>' +
-                '<div><span class="fw-semibold">Tutup:</span> ' + closeDate.toLocaleString('id-ID') + '</div>' +
-                '</div>';
-        }
-
-        async function loadQuizSchedule() {
-            const info = document.getElementById('quizScheduleInfo');
-            const openInput = document.getElementById('quizOpenAt');
-            const closeInput = document.getElementById('quizCloseAt');
-            if (info) info.innerHTML = '<span class="text-xs text-slate-400">Memuat jadwal...</span>';
-            try {
-                const snap = await getDoc(quizScheduleRef);
-                if (!snap.exists()) {
-                    if (openInput) openInput.value = '';
-                    if (closeInput) closeInput.value = '';
-                    if (info) info.innerHTML = '<span class="text-xs text-slate-400">Belum ada jadwal quiz aktif.</span>';
-                    return null;
-                }
-                const data = snap.data() || {};
-                if (openInput) openInput.value = toDatetimeLocalValue(data.open_at);
-                if (closeInput) closeInput.value = toDatetimeLocalValue(data.close_at);
-                if (info) info.innerHTML = formatScheduleInfo(data.open_at, data.close_at);
-                return data;
-            } catch (error) {
-                console.error('Gagal memuat jadwal quiz:', error);
-                if (info) info.innerHTML = '<span class="text-xs" style="color:#dc2626">Gagal memuat jadwal quiz.</span>';
-                return null;
-            }
-        }
-
-        async function saveQuizSchedule(event) {
-            event.preventDefault();
-            const openValue = document.getElementById('quizOpenAt').value;
-            const closeValue = document.getElementById('quizCloseAt').value;
-            const feedback = document.getElementById('quizScheduleFeedback');
-            const saveText = document.getElementById('saveScheduleText');
-            const saveLoading = document.getElementById('saveScheduleLoading');
-            const saveBtn = document.getElementById('saveScheduleBtn');
-
-            if (feedback) {
-                feedback.classList.add('hidden');
-                feedback.textContent = '';
-            }
-
-            if (!openValue || !closeValue) {
-                if (feedback) {
-                    feedback.textContent = 'Waktu buka dan tutup wajib diisi.';
-                    feedback.classList.remove('hidden');
-                }
-                return;
-            }
-
-            const openDate = new Date(openValue);
-            const closeDate = new Date(closeValue);
-            if (Number.isNaN(openDate.getTime()) || Number.isNaN(closeDate.getTime()) || closeDate <= openDate) {
-                if (feedback) {
-                    feedback.textContent = 'Waktu tutup harus lebih besar dari waktu buka.';
-                    feedback.classList.remove('hidden');
-                }
-                return;
-            }
-
-            saveBtn.disabled = true;
-            saveText.classList.add('hidden');
-            saveLoading.classList.remove('hidden');
-            try {
-                await setDoc(quizScheduleRef, {
-                    open_at: Timestamp.fromDate(openDate),
-                    close_at: Timestamp.fromDate(closeDate),
-                    updated_at: serverTimestamp()
-                }, { merge: true });
-                await loadQuizSchedule();
-                showQuizListView();
-            } catch (error) {
-                console.error('Gagal menyimpan jadwal quiz:', error);
-                if (feedback) {
-                    feedback.textContent = 'Gagal menyimpan jadwal quiz.';
-                    feedback.classList.remove('hidden');
-                }
-            } finally {
-                saveBtn.disabled = false;
-                saveText.classList.remove('hidden');
-                saveLoading.classList.add('hidden');
-            }
-        }
-
-        async function loadQuestions() {
-            const container = document.getElementById('quizTableContainer');
-            container.innerHTML = '<p class="text-xs text-slate-400">Memuat data...</p>';
-            try {
-                const q = query(collection(db, 'intern_quizz'), orderBy('created_at', 'desc'));
-                const snap = await getDocs(q);
-                questions = [];
-                snap.forEach(docSnap => {
-                    questions.push({ id: docSnap.id, ...docSnap.data() });
-                });
-                renderQuestions();
-            } catch (error) {
-                console.error('Gagal memuat soal:', error);
-                container.innerHTML = '<p class="text-xs" style="color:#dc2626">Gagal memuat data soal.</p>';
-            }
-        }
-
-        function renderQuestions() {
-            const container = document.getElementById('quizTableContainer');
-            if (!questions.length) {
-                container.innerHTML = '<div class="text-center py-5"><i class="bi bi-inbox" style="font-size:40px;color:#cbd5e1"></i><p class="text-xs mt-2" style="color:#94a3b8">Belum ada soal. Klik "Tambah Pertanyaan" untuk memulai.</p></div>';
-                return;
-            }
-            let html = '<div style="overflow-x:auto">';
-            html += '<table class="table table-sm align-middle mb-0" style="font-size:13px">';
-            html += '<thead><tr style="border-bottom:2px solid #f1f5f9">';
-            html += '<th style="color:#94a3b8;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:8px 6px">No</th>';
-            html += '<th style="color:#94a3b8;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:8px 6px">Pertanyaan</th>';
-            html += '<th style="color:#94a3b8;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:8px 6px">Pilihan</th>';
-            html += '<th style="color:#94a3b8;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:8px 6px">Jawaban</th>';
-            html += '<th style="color:#94a3b8;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:8px 6px;width:100px">Aksi</th>';
-            html += '</tr></thead><tbody>';
-            questions.forEach((q, i) => {
-                const optionsList = ['A', 'B', 'C', 'D'].map(function(key) {
-                    return '<span style="font-size:12px">' + key + '. ' + escapeHtml(q.options?.[key] || '') + '</span>';
-                }).join('<br>');
-                html += '<tr style="border-bottom:1px solid #f8fafc">';
-                html += '<td style="padding:10px 6px;color:#64748b;font-weight:600">' + (i + 1) + '</td>';
-                html += '<td style="padding:10px 6px;color:#0f172a;font-weight:500;max-width:300px">' + escapeHtml(q.question || '') + '</td>';
-                html += '<td style="padding:10px 6px;color:#475569">' + optionsList + '</td>';
-                html += '<td style="padding:10px 6px"><span style="background:#dbeafe;color:#1e40af;font-size:11px;font-weight:600;padding:4px 10px;border-radius:999px;display:inline-block">' + (q.correct_answer || '-') + '</span></td>';
-                html += '<td style="padding:10px 6px;white-space:nowrap">';
-                html += '<button class="edit-quiz-btn btn btn-sm p-1 border-0" data-id="' + q.id + '" style="color:#2563eb" title="Edit"><i class="bi bi-pencil"></i></button>';
-                html += '<button class="delete-quiz-btn btn btn-sm p-1 border-0" data-id="' + q.id + '" style="color:#dc2626" title="Hapus"><i class="bi bi-trash"></i></button>';
-                html += '</td></tr>';
-            });
-            html += '</tbody></table></div>';
-            container.innerHTML = html;
-            container.querySelectorAll('.edit-quiz-btn').forEach(function(btn) {
-                btn.addEventListener('click', function() { editQuestion(btn.dataset.id); });
-            });
-            container.querySelectorAll('.delete-quiz-btn').forEach(function(btn) {
-                btn.addEventListener('click', function() { showDeleteConfirmation(btn.dataset.id); });
-            });
-        }
-
-        function initQuizModule() {
-            const kelolaBtn = document.getElementById('kelolaQuizBtn');
-            if (kelolaBtn) {
-                kelolaBtn.addEventListener('click', async function() {
-                    const modal = new bootstrap.Modal(document.getElementById('quizModal'));
-                    modal.show();
-                    await loadQuestions();
-                    await loadQuizSchedule();
-                });
-            }
-            const tambahBtn = document.getElementById('tambahSoalBtn');
-            if (tambahBtn) tambahBtn.addEventListener('click', showAddForm);
-            const batalBtn = document.getElementById('batalFormBtn');
-            if (batalBtn) {
-                batalBtn.addEventListener('click', function() {
-                    showQuizListView();
-                    resetQuizForm();
-                });
-            }
-            const quizForm = document.getElementById('quizForm');
-            if (quizForm) quizForm.addEventListener('submit', saveQuestion);
-            const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
-            if (confirmDeleteBtn) confirmDeleteBtn.addEventListener('click', confirmDelete);
-            const quizModal = document.getElementById('quizModal');
-            if (quizModal) {
-                quizModal.addEventListener('hidden.bs.modal', function() {
-                    showQuizListView();
-                    resetQuizForm();
-                });
-            }
-
-            const aturJadwalBtn = document.getElementById('aturJadwalBtn');
-            if (aturJadwalBtn) {
-                aturJadwalBtn.addEventListener('click', function() {
-                    showQuizScheduleView();
-                });
-            }
-            const batalScheduleBtn = document.getElementById('batalScheduleBtn');
-            if (batalScheduleBtn) {
-                batalScheduleBtn.addEventListener('click', function() {
-                    showQuizListView();
-                });
-            }
-            const quizScheduleForm = document.getElementById('quizScheduleForm');
-            if (quizScheduleForm) quizScheduleForm.addEventListener('submit', saveQuizSchedule);
-        }
-
-        initQuizModule();
+      initQuizModule();
     </script>
 
     <!-- Quiz Management Modal -->
-    <div class="modal fade" id="quizModal" tabindex="-1" aria-labelledby="quizModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl modal-dialog-scrollable">
-            <div class="modal-content" style="border-radius:20px;border:none;box-shadow:0 20px 60px rgba(0,0,0,.12);overflow:hidden">
-                <div class="modal-header px-4 py-3 sticky-top bg-white" style="border-bottom:1px solid #f1f5f9;z-index:10">
-                    <h5 class="modal-title fw-bold" id="quizModalLabel" style="color:#0B2B6A;font-size:15px">Manajemen Soal Pilihan Ganda</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="font-size:13px"></button>
-                </div>
-                <div class="modal-body p-0">
-                        <div id="quizListView" class="p-4">
-                        <div class="d-flex justify-content-between mb-3 sticky-top bg-white py-2" style="z-index:5">
-                            <button id="aturJadwalBtn" class="px-4 py-2 rounded-xl text-xs fw-semibold border border-slate-200 bg-white hover:bg-slate-50 text-[#0B2B6A]" title="Atur Jadwal Quiz">
-                                <i class="bi bi-calendar-event me-1"></i>Atur Jadwal
-                            </button>
-                            <button id="tambahSoalBtn" class="px-4 py-2 rounded-xl text-xs fw-semibold text-white border-0" style="background:#0B2B6A;transition:all .15s" title="Tambah Pertanyaan Baru">
-                                <i class="bi bi-plus-lg me-1"></i>Tambah Pertanyaan
-                            </button>
-                        </div>
-                        <div id="quizTableContainer">
-                            <p class="text-xs text-slate-400">Memuat data...</p>
-                        </div>
-                    </div>
-                    <!-- Schedule View -->
-                    <div id="quizScheduleView" class="hidden p-4">
-                        <div id="quizScheduleInfo" class="mb-4 p-3 rounded-xl border border-slate-100 bg-slate-50"></div>
-                        <form id="quizScheduleForm" novalidate>
-                            <div class="mb-3">
-                                <label class="form-label text-xs fw-semibold">Waktu Buka Quiz <span class="text-red-500">*</span></label>
-                                <input type="datetime-local" id="quizOpenAt" class="form-control form-control-sm" style="border-radius:12px;font-size:13px;border-color:#e2e8f0" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label text-xs fw-semibold">Waktu Tutup Quiz <span class="text-red-500">*</span></label>
-                                <input type="datetime-local" id="quizCloseAt" class="form-control form-control-sm" style="border-radius:12px;font-size:13px;border-color:#e2e8f0" required>
-                            </div>
-                            <div id="quizScheduleFeedback" class="hidden text-xs text-red-500 mb-3"></div>
-                            <div class="d-flex gap-2 justify-content-end pt-3 mt-3 border-top">
-                                <button type="button" id="batalScheduleBtn" class="px-4 py-2 rounded-xl text-xs fw-semibold border bg-white text-slate-500">Batal</button>
-                                <button type="submit" id="saveScheduleBtn" class="px-4 py-2 rounded-xl text-xs fw-semibold text-white border-0" style="background:#0B2B6A">
-                                    <span id="saveScheduleText">Simpan Jadwal</span>
-                                    <span id="saveScheduleLoading" class="hidden"><span class="spinner-border spinner-border-sm me-1"></span>Menyimpan...</span>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                    <!-- Form View -->
-                    <div id="quizFormView" class="hidden p-4">
-                        <form id="quizForm" novalidate>
-                            <input type="hidden" id="quizFormId" value="">
-                            <div class="mb-3">
-                                <label class="form-label text-xs fw-semibold" style="color:#334155">Pertanyaan <span style="color:#dc2626">*</span></label>
-                                <textarea id="quizQuestion" class="form-control form-control-sm placeholder-dark" rows="3" placeholder="Masukkan pertanyaan..." style="border-radius:12px;font-size:13px;resize:vertical;border-color:#e2e8f0" required></textarea>
-                                <div class="invalid-feedback" style="font-size:11px">Pertanyaan tidak boleh kosong.</div>
-                            </div>
-                            <div class="row g-3 mb-3">
-                                <div class="col-md-6">
-                                    <label class="form-label text-xs fw-semibold" style="color:#334155">Pilihan A <span style="color:#dc2626">*</span></label>
-                                    <input type="text" id="quizOptionA" class="form-control form-control-sm placeholder-dark" placeholder="Pilihan A" style="border-radius:12px;font-size:13px;border-color:#e2e8f0" required>
-                                    <div class="invalid-feedback" style="font-size:11px">Pilihan A wajib diisi.</div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label text-xs fw-semibold" style="color:#334155">Pilihan B <span style="color:#dc2626">*</span></label>
-                                    <input type="text" id="quizOptionB" class="form-control form-control-sm placeholder-dark" placeholder="Pilihan B" style="border-radius:12px;font-size:13px;border-color:#e2e8f0" required>
-                                    <div class="invalid-feedback" style="font-size:11px">Pilihan B wajib diisi.</div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label text-xs fw-semibold" style="color:#334155">Pilihan C <span style="color:#dc2626">*</span></label>
-                                    <input type="text" id="quizOptionC" class="form-control form-control-sm placeholder-dark" placeholder="Pilihan C" style="border-radius:12px;font-size:13px;border-color:#e2e8f0" required>
-                                    <div class="invalid-feedback" style="font-size:11px">Pilihan C wajib diisi.</div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label text-xs fw-semibold" style="color:#334155">Pilihan D <span style="color:#dc2626">*</span></label>
-                                    <input type="text" id="quizOptionD" class="form-control form-control-sm placeholder-dark" placeholder="Pilihan D" style="border-radius:12px;font-size:13px;border-color:#e2e8f0" required>
-                                    <div class="invalid-feedback" style="font-size:11px">Pilihan D wajib diisi.</div>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label text-xs fw-semibold" style="color:#334155">Jawaban Benar <span style="color:#dc2626">*</span></label>
-                                <div class="d-flex gap-3 flex-wrap">
-                                    <div class="form-check"><input class="form-check-input" type="radio" name="correctAnswer" id="correctA" value="A"><label class="form-check-label" for="correctA" style="font-size:13px;color:#334155">A</label></div>
-                                    <div class="form-check"><input class="form-check-input" type="radio" name="correctAnswer" id="correctB" value="B"><label class="form-check-label" for="correctB" style="font-size:13px;color:#334155">B</label></div>
-                                    <div class="form-check"><input class="form-check-input" type="radio" name="correctAnswer" id="correctC" value="C"><label class="form-check-label" for="correctC" style="font-size:13px;color:#334155">C</label></div>
-                                    <div class="form-check"><input class="form-check-input" type="radio" name="correctAnswer" id="correctD" value="D"><label class="form-check-label" for="correctD" style="font-size:13px;color:#334155">D</label></div>
-                                </div>
-                                <div class="correct-answer-feedback hidden text-xs mt-1" style="color:#dc2626">Silakan pilih jawaban yang benar.</div>
-                            </div>
-                            <div class="d-flex gap-2 justify-content-end pt-3 mt-3" style="border-top:1px solid #f1f5f9">
-                                <button type="button" id="batalFormBtn" class="px-4 py-2 rounded-xl text-xs fw-semibold border" style="border-color:#e2e8f0;background:#fff;color:#64748b;transition:all .15s">Batal</button>
-                                <button type="submit" id="simpanSoalBtn" class="px-4 py-2 rounded-xl text-xs fw-semibold text-white border-0" style="background:#0B2B6A;transition:all .15s">
-                                    <span id="simpanSoalText">Simpan</span>
-                                    <span id="simpanSoalLoading" class="hidden"><span class="spinner-border spinner-border-sm me-1" role="status"></span>Menyimpan...</span>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+    <div
+      class="modal fade"
+      id="quizModal"
+      tabindex="-1"
+      aria-labelledby="quizModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div
+          class="modal-content"
+          style="
+            border-radius: 20px;
+            border: none;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+          "
+        >
+          <div
+            class="modal-header px-4 py-3 sticky-top bg-white"
+            style="border-bottom: 1px solid #f1f5f9; z-index: 10"
+          >
+            <h5
+              class="modal-title fw-bold"
+              id="quizModalLabel"
+              style="color: #0b2b6a; font-size: 15px"
+            >
+              Manajemen Soal Pilihan Ganda
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+              style="font-size: 13px"
+            ></button>
+          </div>
+          <div class="modal-body p-0">
+            <div id="quizListView" class="p-4">
+              <div
+                class="d-flex justify-content-between mb-3 sticky-top bg-white py-2"
+                style="z-index: 5"
+              >
+                <button
+                  id="aturJadwalBtn"
+                  class="px-4 py-2 rounded-xl text-xs fw-semibold border border-slate-200 bg-white hover:bg-slate-50 text-[#0B2B6A]"
+                  title="Atur Jadwal Quiz"
+                >
+                  <i class="bi bi-calendar-event me-1"></i>Atur Jadwal
+                </button>
+                <button
+                  id="tambahSoalBtn"
+                  class="px-4 py-2 rounded-xl text-xs fw-semibold text-white border-0"
+                  style="background: #0b2b6a; transition: all 0.15s"
+                  title="Tambah Pertanyaan Baru"
+                >
+                  <i class="bi bi-plus-lg me-1"></i>Tambah Pertanyaan
+                </button>
+              </div>
+              <div id="quizTableContainer">
+                <p class="text-xs text-slate-400">Memuat data...</p>
+              </div>
             </div>
+            <!-- Schedule View -->
+            <div id="quizScheduleView" class="hidden p-4">
+              <div
+                id="quizScheduleInfo"
+                class="mb-4 p-3 rounded-xl border border-slate-100 bg-slate-50"
+              ></div>
+              <form id="quizScheduleForm" novalidate>
+                <div class="mb-3">
+                  <label class="form-label text-xs fw-semibold"
+                    >Waktu Buka Quiz <span class="text-red-500">*</span></label
+                  >
+                  <input
+                    type="datetime-local"
+                    id="quizOpenAt"
+                    class="form-control form-control-sm"
+                    style="
+                      border-radius: 12px;
+                      font-size: 13px;
+                      border-color: #e2e8f0;
+                    "
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label text-xs fw-semibold"
+                    >Waktu Tutup Quiz <span class="text-red-500">*</span></label
+                  >
+                  <input
+                    type="datetime-local"
+                    id="quizCloseAt"
+                    class="form-control form-control-sm"
+                    style="
+                      border-radius: 12px;
+                      font-size: 13px;
+                      border-color: #e2e8f0;
+                    "
+                    required
+                  />
+                </div>
+                <div
+                  id="quizScheduleFeedback"
+                  class="hidden text-xs text-red-500 mb-3"
+                ></div>
+                <div
+                  class="d-flex gap-2 justify-content-end pt-3 mt-3 border-top"
+                >
+                  <button
+                    type="button"
+                    id="batalScheduleBtn"
+                    class="px-4 py-2 rounded-xl text-xs fw-semibold border bg-white text-slate-500"
+                  >
+                    Batal
+                  </button>
+                  <button
+                    type="submit"
+                    id="saveScheduleBtn"
+                    class="px-4 py-2 rounded-xl text-xs fw-semibold text-white border-0"
+                    style="background: #0b2b6a"
+                  >
+                    <span id="saveScheduleText">Simpan Jadwal</span>
+                    <span id="saveScheduleLoading" class="hidden"
+                      ><span
+                        class="spinner-border spinner-border-sm me-1"
+                      ></span
+                      >Menyimpan...</span
+                    >
+                  </button>
+                </div>
+              </form>
+            </div>
+            <!-- Form View -->
+            <div id="quizFormView" class="hidden p-4">
+              <form id="quizForm" novalidate>
+                <input type="hidden" id="quizFormId" value="" />
+                <div class="mb-3">
+                  <label
+                    class="form-label text-xs fw-semibold"
+                    style="color: #334155"
+                    >Pertanyaan <span style="color: #dc2626">*</span></label
+                  >
+                  <textarea
+                    id="quizQuestion"
+                    class="form-control form-control-sm placeholder-dark"
+                    rows="3"
+                    placeholder="Masukkan pertanyaan..."
+                    style="
+                      border-radius: 12px;
+                      font-size: 13px;
+                      resize: vertical;
+                      border-color: #e2e8f0;
+                    "
+                    required
+                  ></textarea>
+                  <div class="invalid-feedback" style="font-size: 11px">
+                    Pertanyaan tidak boleh kosong.
+                  </div>
+                </div>
+                <div class="row g-3 mb-3">
+                  <div class="col-md-6">
+                    <label
+                      class="form-label text-xs fw-semibold"
+                      style="color: #334155"
+                      >Pilihan A <span style="color: #dc2626">*</span></label
+                    >
+                    <input
+                      type="text"
+                      id="quizOptionA"
+                      class="form-control form-control-sm placeholder-dark"
+                      placeholder="Pilihan A"
+                      style="
+                        border-radius: 12px;
+                        font-size: 13px;
+                        border-color: #e2e8f0;
+                      "
+                      required
+                    />
+                    <div class="invalid-feedback" style="font-size: 11px">
+                      Pilihan A wajib diisi.
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label
+                      class="form-label text-xs fw-semibold"
+                      style="color: #334155"
+                      >Pilihan B <span style="color: #dc2626">*</span></label
+                    >
+                    <input
+                      type="text"
+                      id="quizOptionB"
+                      class="form-control form-control-sm placeholder-dark"
+                      placeholder="Pilihan B"
+                      style="
+                        border-radius: 12px;
+                        font-size: 13px;
+                        border-color: #e2e8f0;
+                      "
+                      required
+                    />
+                    <div class="invalid-feedback" style="font-size: 11px">
+                      Pilihan B wajib diisi.
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label
+                      class="form-label text-xs fw-semibold"
+                      style="color: #334155"
+                      >Pilihan C <span style="color: #dc2626">*</span></label
+                    >
+                    <input
+                      type="text"
+                      id="quizOptionC"
+                      class="form-control form-control-sm placeholder-dark"
+                      placeholder="Pilihan C"
+                      style="
+                        border-radius: 12px;
+                        font-size: 13px;
+                        border-color: #e2e8f0;
+                      "
+                      required
+                    />
+                    <div class="invalid-feedback" style="font-size: 11px">
+                      Pilihan C wajib diisi.
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label
+                      class="form-label text-xs fw-semibold"
+                      style="color: #334155"
+                      >Pilihan D <span style="color: #dc2626">*</span></label
+                    >
+                    <input
+                      type="text"
+                      id="quizOptionD"
+                      class="form-control form-control-sm placeholder-dark"
+                      placeholder="Pilihan D"
+                      style="
+                        border-radius: 12px;
+                        font-size: 13px;
+                        border-color: #e2e8f0;
+                      "
+                      required
+                    />
+                    <div class="invalid-feedback" style="font-size: 11px">
+                      Pilihan D wajib diisi.
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label
+                    class="form-label text-xs fw-semibold"
+                    style="color: #334155"
+                    >Jawaban Benar <span style="color: #dc2626">*</span></label
+                  >
+                  <div class="d-flex gap-3 flex-wrap">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="correctAnswer"
+                        id="correctA"
+                        value="A"
+                      /><label
+                        class="form-check-label"
+                        for="correctA"
+                        style="font-size: 13px; color: #334155"
+                        >A</label
+                      >
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="correctAnswer"
+                        id="correctB"
+                        value="B"
+                      /><label
+                        class="form-check-label"
+                        for="correctB"
+                        style="font-size: 13px; color: #334155"
+                        >B</label
+                      >
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="correctAnswer"
+                        id="correctC"
+                        value="C"
+                      /><label
+                        class="form-check-label"
+                        for="correctC"
+                        style="font-size: 13px; color: #334155"
+                        >C</label
+                      >
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="correctAnswer"
+                        id="correctD"
+                        value="D"
+                      /><label
+                        class="form-check-label"
+                        for="correctD"
+                        style="font-size: 13px; color: #334155"
+                        >D</label
+                      >
+                    </div>
+                  </div>
+                  <div
+                    class="correct-answer-feedback hidden text-xs mt-1"
+                    style="color: #dc2626"
+                  >
+                    Silakan pilih jawaban yang benar.
+                  </div>
+                </div>
+                <div
+                  class="d-flex gap-2 justify-content-end pt-3 mt-3"
+                  style="border-top: 1px solid #f1f5f9"
+                >
+                  <button
+                    type="button"
+                    id="batalFormBtn"
+                    class="px-4 py-2 rounded-xl text-xs fw-semibold border"
+                    style="
+                      border-color: #e2e8f0;
+                      background: #fff;
+                      color: #64748b;
+                      transition: all 0.15s;
+                    "
+                  >
+                    Batal
+                  </button>
+                  <button
+                    type="submit"
+                    id="simpanSoalBtn"
+                    class="px-4 py-2 rounded-xl text-xs fw-semibold text-white border-0"
+                    style="background: #0b2b6a; transition: all 0.15s"
+                  >
+                    <span id="simpanSoalText">Simpan</span>
+                    <span id="simpanSoalLoading" class="hidden"
+                      ><span
+                        class="spinner-border spinner-border-sm me-1"
+                        role="status"
+                      ></span
+                      >Menyimpan...</span
+                    >
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- Delete Confirmation Modal -->
-    <div class="modal fade" id="deleteQuizModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-sm modal-dialog-centered">
-            <div class="modal-content" style="border-radius:20px;border:none;box-shadow:0 20px 60px rgba(0,0,0,.12)">
-                <div class="modal-body p-4 text-center">
-                    <div class="mb-3"><i class="bi bi-exclamation-triangle" style="font-size:40px;color:#dc2626"></i></div>
-                    <h6 class="fw-bold mb-2" style="color:#0f172a;font-size:14px">Hapus Pertanyaan?</h6>
-                    <p class="text-xs mb-3" style="color:#64748b">Tindakan ini tidak dapat dibatalkan.</p>
-                    <div class="d-flex gap-2 justify-content-center">
-                        <button type="button" class="btn btn-sm px-3 rounded-xl" data-bs-dismiss="modal" style="font-size:12px;border:1px solid #e2e8f0;color:#64748b;background:#fff">Batal</button>
-                        <button type="button" id="confirmDeleteBtn" class="btn btn-sm px-3 rounded-xl text-white border-0" style="font-size:12px;background:#dc2626">
-                            <span id="deleteText">Hapus</span>
-                            <span id="deleteLoading" class="hidden"><span class="spinner-border spinner-border-sm" role="status"></span></span>
-                        </button>
-                    </div>
-                </div>
+    <div
+      class="modal fade"
+      id="deleteQuizModal"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div
+          class="modal-content"
+          style="
+            border-radius: 20px;
+            border: none;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+          "
+        >
+          <div class="modal-body p-4 text-center">
+            <div class="mb-3">
+              <i
+                class="bi bi-exclamation-triangle"
+                style="font-size: 40px; color: #dc2626"
+              ></i>
             </div>
+            <h6 class="fw-bold mb-2" style="color: #0f172a; font-size: 14px">
+              Hapus Pertanyaan?
+            </h6>
+            <p class="text-xs mb-3" style="color: #64748b">
+              Tindakan ini tidak dapat dibatalkan.
+            </p>
+            <div class="d-flex gap-2 justify-content-center">
+              <button
+                type="button"
+                class="btn btn-sm px-3 rounded-xl"
+                data-bs-dismiss="modal"
+                style="
+                  font-size: 12px;
+                  border: 1px solid #e2e8f0;
+                  color: #64748b;
+                  background: #fff;
+                "
+              >
+                Batal
+              </button>
+              <button
+                type="button"
+                id="confirmDeleteBtn"
+                class="btn btn-sm px-3 rounded-xl text-white border-0"
+                style="font-size: 12px; background: #dc2626"
+              >
+                <span id="deleteText">Hapus</span>
+                <span id="deleteLoading" class="hidden"
+                  ><span
+                    class="spinner-border spinner-border-sm"
+                    role="status"
+                  ></span
+                ></span>
+              </button>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-</body>
-
+  </body>
 </html>
